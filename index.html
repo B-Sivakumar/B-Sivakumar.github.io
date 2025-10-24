@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Sivakumar B - Portfolio</title>
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        /*=============== VARIABLES CSS ===============*/
+        :root {
+            --header-height: 3rem;
+
+            /*========== Colors ==========*/
+            --hue-color: 220; /* Purple 250 - Blue 220 - Pink 340 */
+            
+            /* HSL color mode */
+            --first-color: hsl(var(--hue-color), 69%, 61%);
+            --first-color-second: hsl(var(--hue-color), 69%, 61%);
+            --first-color-alt: hsl(var(--hue-color), 57%, 53%);
+            --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
+            --title-color: hsl(var(--hue-color), 8%, 95%);
+            --text-color: hsl(var(--hue-color), 8%, 75%);
+            --input-color: hsl(var(--hue-color), 29%, 16%);
+            --body-color: hsl(var(--hue-color), 28%, 12%);
+            --container-color: hsl(var(--hue-color), 29%, 16%);
+            --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+            --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+
+            /*========== Font and typography ==========*/
+            --body-font: 'Poppins', sans-serif;
+            --big-font-size: 2rem;
+            --h1-font-size: 1.5rem;
+            --h2-font-size: 1.25rem;
+            --h3-font-size: 1.125rem;
+            --normal-font-size: .938rem;
+            --small-font-size: .813rem;
+            --smaller-font-size: .75rem;
+
+            /*========== Font weight ==========*/
+            --font-medium: 500;
+            --font-semi-bold: 600;
+
+            /*========== Margenes Bottom ==========*/
+            --mb-0-25: .25rem;
+            --mb-0-5: .5rem;
+            --mb-0-75: .75rem;
+            --mb-1: 1rem;
+            --mb-1-5: 1.5rem;
+            --mb-2: 2rem;
+            --mb-2-5: 2.5rem;
+            --mb-3: 3rem;
+
+            /*========== z index ==========*/
+            --z-tooltip: 10;
+            --z-fixed: 100;
+            --z-modal: 1000;
+        }
+
+        @media screen and (min-width: 968px) {
+            :root {
+                --big-font-size: 3rem;
+                --h1-font-size: 2.25rem;
+                --h2-font-size: 1.5rem;
+                --h3-font-size: 1.25rem;
+                --normal-font-size: 1rem;
+                --small-font-size: .875rem;
+                --smaller-font-size: .813rem;
+            }
+        }
+
+        /*=============== THEME ===============*/
+        body.light-theme {
+            --first-color-second: hsl(var(--hue-color), 30%, 8%);
+            --title-color: hsl(var(--hue-color), 8%, 15%);
+            --text-color: hsl(var(--hue-color), 8%, 45%);
+            --input-color: hsl(var(--hue-color), 70%, 96%);
+            --body-color: hsl(var(--hue-color), 60%, 99%);
+            --container-color: #FFF;
+            --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+            --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+        }
+
+        /*=============== BASE ===============*/
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0 0 var(--header-height) 0;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            background-color: var(--body-color);
+            color: var(--text-color);
+        }
+
+        /*=============== REUSABLE CSS CLASSES ===============*/
+        .section { padding: 2rem 0 4rem; }
+        .section__title { font-size: var(--h1-font-size); color: var(--title-color); }
+        .section__subtitle { display: block; font-size: var(--small-font-size); margin-bottom: var(--mb-3); }
+        .section__title, .section__subtitle { text-align: center; }
+        .button {
+            display: inline-block; background-color: var(--first-color); color: #FFF;
+            padding: 1rem; border-radius: 0.5rem; font-weight: var(--font-medium); transition: 0.3s;
+        }
+        .button:hover { background-color: var(--first-color-alt); }
+        .button--flex { display: inline-flex; align-items: center; }
+        .button__icon { margin-left: var(--mb-0-5); }
+
+        /*=============== Custom Styles ===============*/
+        .scroll-header { box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15); }
+        .active-link { color: var(--first-color); }
+        .home__blob { fill: var(--first-color); }
+        .home__blob-img { width: 180px; }
+        .home__social-icon:hover { color: var(--first-color-alt); }
+        .skills__open .skills__arrow { transform: rotate(-180deg); }
+        .skills__open .skills__list { height: max-content; margin-bottom: var(--mb-2-5); }
+        .certification__modal {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.7);
+            z-index: var(--z-modal); display: flex; justify-content: center; align-items: center;
+            padding: 1rem; opacity: 0; visibility: hidden; transition: .3s;
+        }
+        .certification__modal-content {
+            position: relative; background-color: var(--container-color); padding: 2rem;
+            border-radius: .5rem; max-width: 90%; max-height: 90vh;
+        }
+        /* Style for the iframe (replaces modal-img) */
+        .certification__modal-iframe {
+            width: 85vw; 
+            height: 80vh; 
+            max-width: 1200px; 
+            border: none; 
+            border-radius: .5rem;
+        }
+        .certification__modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem;
+            color: var(--first-color); cursor: pointer;
+        }
+        .active-modal { opacity: 1; visibility: visible; }
+        .swiper-button-next::after, .swiper-button-prev::after { content: '' !important; }
+        .swiper-button-next, .swiper-button-prev { font-size: 2rem !important; color: var(--first-color) !important; }
+        .swiper-pagination-bullet-active { background-color: var(--first-color) !important; }
+        ::-webkit-scrollbar { width: 0.60rem; background-color: var(--scroll-bar-color); border-radius: 0.5rem; }
+        ::-webkit-scrollbar-thumb { background-color: var(--scroll-thumb-color); border-radius: 0.5rem; }
+    </style>
+</head>
+<body class="text-[var(--text-color)]">
+    <header class="w-full fixed bottom-0 left-0 z-50 bg-[var(--body-color)] md:top-0 md:bottom-auto" id="header">
+        <nav class="h-[var(--header-height)] md:h-[calc(var(--header-height)_+_1.5rem)] flex justify-between items-center container mx-auto px-4">
+            <a href="#" class="text-[var(--title-color)] font-medium hover:text-[var(--first-color)] transition-colors">Sivakumar B</a>
+            <div class="md:!block" id="nav-menu">
+                <ul class="grid grid-cols-4 gap-y-4 md:flex md:gap-x-8">
+                    <li><a href="#home" class="nav__link active-link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-estate text-xl md:hidden"></i>Home</a></li>
+                    <li><a href="#about" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-user text-xl md:hidden"></i>About</a></li>
+                    <li><a href="#skills" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-file-alt text-xl md:hidden"></i>Skills</a></li>
+                    <li><a href="#experience" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-briefcase-alt text-xl md:hidden"></i>Experience</a></li>
+                    <li><a href="#projects" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-scenery text-xl md:hidden"></i>Projects</a></li>
+                    <li><a href="#certifications" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-award text-xl md:hidden"></i>Certs</a></li>
+                    <li><a href="#contact" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-message text-xl md:hidden"></i>Contact</a></li>
+                </ul>
+            </div>
+            <i class="uil uil-moon change-theme text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="theme-button"></i>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4">
+        <section class="section min-h-screen grid items-center" id="home">
+            <div class="grid gap-8 md:grid-cols-[1fr_max-content_max-content] md:items-center pt-16">
+                <div class="grid content-center md:order-1 relative h-full">
+                    <div class="home__social flex flex-col items-center gap-y-4">
+                        <a href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank" class="home__social-icon text-xl text-[var(--first-color)] transition-transform duration-300 hover:-translate-y-1"><i class="uil uil-linkedin-alt"></i></a>
+                        <a href="https://github.com/BSivakumar" target="_blank" class="home__social-icon text-xl text-[var(--first-color)] transition-transform duration-300 hover:-translate-y-1"><i class="uil uil-github-alt"></i></a>
+                    </div>
+                </div>
+                <div class="md:order-3 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-semibold text-[var(--title-color)]">Hi, I'm Sivakumar B</h1>
+                    <h3 class="text-lg md:text-xl font-medium mb-2 text-[var(--text-color)] h-6"><span class="auto-type"></span></h3>
+                    <p class="mb-8">Seeking to leverage my IT foundation and hands-on experience in innovative projects, contributing to impactful tech solutions while pursuing continuous growth.</p>
+                    <a href="#contact" class="button button--flex">Contact Me <i class="uil uil-message button__icon"></i></a>
+                </div>
+                <div class="relative justify-self-center md:order-2">
+                    <svg class="home__blob w-52 md:w-96" viewBox="0 0 200 187" xmlns="http://www.w.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <mask id="mask0" mask-type="alpha">
+                            <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 41.7223 152.469 24.3446 124.841C6.96687 97.2132 -8.98929 72.481 9.8583 49.9561C28.7058 27.4312 56.58 12.0821 87.7309 4.3482C118.882 -3.3857 154.553 10.8581 174.404 20.4884C182.994 25.0446 188.083 30.7383 190.312 36.4879Z"/>
+                        </mask>
+                        <g mask="url(#mask0)">
+                            <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 41.7223 152.469 24.3446 124.841C6.96687 97.2132 -8.98929 72.481 9.8583 49.9561C28.7058 27.4312 56.58 12.0821 87.7309 4.3482C118.882 -3.3857 154.553 10.8581 174.404 20.4884C182.994 25.0446 188.083 30.7383 190.312 36.4879Z"/>
+                            <image class="home__blob-img" x="10" y="8" href="http://googleusercontent.com/image_generation_content/0"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section__title">About Me</h2>
+            <span class="section__subtitle">My introduction & education</span>
+            <div class="grid gap-12 md:grid-cols-2 md:items-start">
+                <div class="text-center md:text-left">
+                    <p class="mb-8">A passionate and driven IT student with a strong foundation in programming and web development. My internship at Dodovy honed my skills in digital marketing and startup operations. I am eager to apply my technical knowledge and collaborative spirit to real-world challenges.</p>
+                </div>
+                <div class="education__container">
+                    <div class="bg-[var(--container-color)] p-6 rounded-lg text-center mb-4"><h3 class="text-lg font-medium mb-2 text-[var(--title-color)]">B.Tech in Information Technology</h3><p class="text-sm mb-1">Sri Krishna College of Technology, Coimbatore</p><p class="text-xs mb-2">(2024 – Present) | GPA: 8.25</p></div>
+                    <div class="bg-[var(--container-color)] p-6 rounded-lg text-center mb-4"><h3 class="text-lg font-medium mb-2 text-[var(--title-color)]">Higher Secondary (HSC)</h3><p class="text-sm mb-1">R.G. Matric Hr. Sec. School, Udumalpet</p><p class="text-xs mb-2">(2024) | 91.5% Aggregate</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <h2 class="section__title">Skills</h2>
+            <span class="section__subtitle">My technical proficiency</span>
+            <div class="grid gap-y-8 md:grid-cols-2 lg:grid-cols-3 md:gap-x-12">
+                <div class="lg:col-span-2">
+                    <div class="skills__content skills__open bg-[var(--container-color)] p-8 rounded-lg">
+                        <div class="skills__header flex items-center cursor-pointer">
+                            <i class="uil uil-brackets-curly text-2xl text-[var(--first-color)]"></i>
+                            <div class="ml-4"><h1 class="text-lg font-medium text-[var(--title-color)]">Technical Skills</h1></div>
+                            <i class="uil uil-angle-down skills__arrow text-2xl text-[var(--first-color)] ml-auto transition-transform duration-400"></i>
+                        </div>
+                        <div class="skills__list grid gap-y-4 pt-4 overflow-hidden h-max">
+                            <p><strong>Programming:</strong> Intermediate knowledge of C++, Python and Java.</p>
+                            <p><strong>Web Tech:</strong> Familiar with HTML, CSS, and basic JavaScript.</p>
+                            <p><strong>Design:</strong> Proficient in Canva, Draw.io, and Photoshop.</p>
+                            <p><strong>Tools:</strong> Hands-on with VS Code, WordPress, and GitHub.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="skills__content skills__open bg-[var(--container-color)] p-8 rounded-lg">
+                        <div class="skills__header flex items-center cursor-pointer">
+                            <i class="uil uil-users-alt text-2xl text-[var(--first-color)]"></i>
+                            <div class="ml-4"><h1 class="text-lg font-medium text-[var(--title-color)]">Soft Skills</h1></div>
+                            <i class="uil uil-angle-down skills__arrow text-2xl text-[var(--first-color)] ml-auto transition-transform duration-400"></i>
+                        </div>
+                        <div class="skills__list grid grid-cols-2 gap-x-4 gap-y-2 pt-4 overflow-hidden h-max">
+                            <span>• Leadership</span><span>• Collaboration</span>
+                            <span>• Adaptability</span><span>• Problem-solving</span>
+                            <span>• Communication</span><span>• Conflict resolution</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="experience">
+            <h2 class="section__title">Experience</h2>
+            <span class="section__subtitle">My professional journey</span>
+            <div class="bg-[var(--container-color)] p-8 rounded-lg max-w-2xl mx-auto">
+                <h3 class="text-xl font-semibold text-[var(--title-color)] mb-1">Digital Marketing Admin Intern</h3>
+                <p class="font-medium mb-2">Dodovy (Startup) – Udumalpet <span class="text-sm text-[var(--text-color)]">(2022 – 2023)</span></p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Managed WordPress admin tasks, including content updates and plugin handling.</li>
+                    <li>Designed and executed social media marketing campaigns on Instagram and WhatsApp.</li>
+                    <li>Supported email marketing outreach and tracked engagement metrics.</li>
+                    <li>Gained valuable experience in startup operations and digital branding.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <h2 class="section__title">Projects</h2>
+            <span class="section__subtitle">Most recent work</span>
+            <div class="container mx-auto max-w-4xl relative">
+                <div class="swiper projects-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide grid gap-8 md:grid-cols-2 items-center bg-[var(--container-color)] p-8 rounded-lg">
+                            <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=E-Commerce" alt="E-Commerce Website Project" class="rounded-lg w-full">
+                            <div><h3 class="text-xl font-semibold text-[var(--title-color)] mb-2">E-Commerce Website</h3><p class="mb-4">A responsive e-commerce platform built with HTML, CSS, and vanilla JavaScript, featuring a dynamic product catalog and shopping cart.</p><a href="#" class="button button--flex button--small">Demo <i class="uil uil-arrow-right button__icon"></i></a></div>
+                        </div>
+                        <div class="swiper-slide grid gap-8 md:grid-cols-2 items-center bg-[var(--container-color)] p-8 rounded-lg">
+                            <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=Task+Manager" alt="Task Management App Project" class="rounded-lg w-full">
+                            <div><h3 class="text-xl font-semibold text-[var(--title-color)] mb-2">Task Management App</h3><p class="mb-4">A simple task manager created using Python, allowing users to add, delete, and track daily tasks through a clean command-line interface.</p><a href="#" class="button button--flex button--small">GitHub <i class="uil uil-github-alt button__icon"></i></a></div>
+                        </div>
+                        <div class="swiper-slide grid gap-8 md:grid-cols-2 items-center bg-[var(--container-color)] p-8 rounded-lg">
+                            <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=Personal+Blog" alt="Personal Blog Project" class="rounded-lg w-full">
+                            <div><h3 class="text-xl font-semibold text-[var(--title-color)] mb-2">Personal Blog</h3><p class="mb-4">A personal blog developed with WordPress, focusing on clean design and content management. Customized theme and plugins for enhanced functionality.</p><a href="#" class="button button--flex button--small">View <i class="uil uil-arrow-right button__icon"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"><i class="uil uil-angle-right-b"></i></div>
+                    <div class="swiper-button-prev"><i class="uil uil-angle-left-b"></i></div>
+                    <div class="swiper-pagination mt-8 relative"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="certifications">
+            <h2 class="section__title">Certifications</h2>
+            <span class="section__subtitle">My credentials</span>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Object Oriented Programming</h3><p class="text-xs mb-2">NPTEL</p><a href="h#" class="certification__button text-sm text-[var(--first-color)]" data-src="/Users/sivakumar/Sivakumar/Learnings/Portfolio/SIVAKUMAR B- RAG LAB CERTIFICATE.pdf">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Software Engineering Lite</h3><p class="text-xs mb-2">JP Morgan Chase</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intro to Cloud Computing</h3><p class="text-xs mb-2">IBM – Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Data Science Foundations</h3><p class="text-xs mb-2">NASBA – LinkedIn</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intro to Java Programming</h3><p class="text-xs mb-2">Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intermediate OOP with Java</h3><p class="text-xs mb-2">Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Adv. Relational Database & SQL</h3><p class="text-xs mb-2">Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Business English Writing</h3><p class="text-xs mb-2">HKUST – Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+            </div>
+            
+            <div class="certification__modal" id="certification-modal">
+                <div class="certification__modal-content">
+                    <i class="uil uil-times certification__modal-close" id="modal-close"></i>
+                    <iframe id="modal-iframe" class="certification__modal-iframe" src=""></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <h2 class="section__title">Contact Me</h2>
+            <span class="section__subtitle">Get in touch</span>
+            <div class="grid gap-y-12 md:grid-cols-2 md:gap-x-8 max-w-4xl mx-auto">
+                <div>
+                    <div class="flex items-center mb-8"><i class="uil uil-phone text-2xl text-[var(--first-color)]"></i><div class="ml-4"><h3 class="text-base font-medium text-[var(--title-color)]">Call Me</h3><span class="text-sm">7708587882</span></div></div>
+                    <div class="flex items-center mb-8"><i class="uil uil-envelope text-2xl text-[var(--first-color)]"></i><div class="ml-4"><h3 class="text-base font-medium text-[var(--title-color)]">Email</h3><span class="text-sm">sivakumar290307@gmail.com</span></div></div>
+                    <div class="flex items-center mb-8"><i class="uil uil-map-marker text-2xl text-[var(--first-color)]"></i><div class="ml-4"><h3 class="text-base font-medium text-[var(--title-color)]">Location</h3><span class="text-sm">Coimbatore, India</span></div></div>
+                </div>
+                <form action="https://formspree.io/f/your_form_id" method="POST" class="grid gap-y-6">
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div class="bg-[var(--input-color)] rounded-lg p-4"><label for="name" class="text-xs font-medium text-[var(--title-color)]">Name</label><input type="text" id="name" name="name" required class="w-full bg-transparent border-none outline-none text-[var(--text-color)] text-sm p-1"></div>
+                        <div class="bg-[var(--input-color)] rounded-lg p-4"><label for="email" class="text-xs font-medium text-[var(--title-colr)]">Email</label><input type="email" id="email" name="email" required class="w-full bg-transparent border-none outline-none text-[var(--text-color)] text-sm p-1"></div>
+                    </div>
+                    <div class="bg-[var(--input-color)] rounded-lg p-4"><label for="project" class="text-xs font-medium text-[var(--title-color)]">Project</label><input type="text" id="project" name="project" required class="w-full bg-transparent border-none outline-none text-[var(--text-color)] text-sm p-1"></div>
+                    <div class="bg-[var(--input-color)] rounded-lg p-4"><label for="message" class="text-xs font-medium text-[var(--title-color)]">Message</label><textarea id="message" name="message" rows="5" required class="w-full bg-transparent border-none outline-none text-[var(--text-color)] text-sm p-1 resize-none"></textarea></div>
+                    <div><button type="submit" class="button button--flex">Send Message <i class="uil uil-message button__icon"></i></button></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[var(--container-color)] border-t border-solid border-[rgba(255,255,255,0.1)] pt-8">
+        <div class="container mx-auto px-4 pb-12 text-center">
+            <div class="flex justify-center items-center gap-x-3 mb-2">
+                <svg width="24" height="24" viewBox="0 0 100 100" fill="var(--title-color)" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30,15 C45,5 65,5 80,20 L80,80 C65,95 45,95 30,80 C15,65 15,35 30,15 Z M55,15 C50,20 45,30 45,50 C45,70 50,80 55,85 L55,15 Z"/>
+                    <path d="M70,85 C65,80 60,70 60,50 C60,30 65,20 70,15 L70,85 Z"/>
+                </svg>
+                 <h1 class="text-2xl font-semibold text-[var(--title-color)]">Sivakumar B</h1>
+            </div>
+           <p class="text-[var(--text-color)] mb-4">Aspiring Developer</p>
+           <div class="flex justify-center gap-x-6">
+                <a href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank" class="text-xl text-[var(--title-color)] hover:text-[var(--first-color)] transition-colors"><i class="uil uil-linkedin-alt"></i></a>
+                <a href="https://github.com/BSivakumar" target="_blank" class="text-xl text-[var(--title-color)] hover:text-[var(--first-color)] transition-colors"><i class="uil uil-github-alt"></i></a>
+           </div>
+        </div>
+        <p class="text-center text-xs pb-8 text-[var(--text-color)]">&copy; Sivakumar B. All rights reserved</p>
+    </footer>
+    
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillsHeaders = document.querySelectorAll('.skills__header');
+            skillsHeaders.forEach(el => el.addEventListener('click', () => el.parentElement.classList.toggle('skills__open')));
+            
+            /*============ CORRECTED MODAL JS ============*/
+            const modal = document.getElementById('certification-modal'),
+                  modalIframe = document.getElementById('modal-iframe'), // Changed from modalImg
+                  modalClose = document.getElementById('modal-close'),
+                  certButtons = document.querySelectorAll('.certification__button');
+
+            certButtons.forEach(button => button.addEventListener('click', e => {
+                e.preventDefault();
+                modalIframe.src = button.dataset.src; // Changed from modalImg
+                modal.classList.add('active-modal');
+            }));
+
+            const closeModal = () => {
+                modal.classList.remove('active-modal');
+                modalIframe.src = ""; // Added this to clear the iframe when you close it
+            };
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+            
+            /*============ OTHER JS ============*/
+            let swiperProjects = new Swiper(".projects-swiper", { cssMode: true, loop: true, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, pagination: { el: ".swiper-pagination", clickable: true } });
+            
+            const sections = document.querySelectorAll('section[id]');
+            function scrollActive() {
+                const scrollY = window.pageYOffset;
+                sections.forEach(current => {
+                    const sectionHeight = current.offsetHeight, sectionTop = current.offsetTop - 50, sectionId = current.getAttribute('id'), link = document.querySelector('#nav-menu a[href*=' + sectionId + ']');
+                    if (link) { if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) link.classList.add('active-link'); else link.classList.remove('active-link'); }
+                });
+            }
+            window.addEventListener('scroll', scrollActive);
+            
+            function scrollHeader() { const nav = document.getElementById('header'); if (this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header'); }
+            window.addEventListener('scroll', scrollHeader);
+            
+            new Typed('.auto-type', { strings: ['IT Student', 'Aspiring Developer', 'Tech Enthusiast'], typeSpeed: 100, backSpeed: 60, loop: true });
+            
+            const themeButton = document.getElementById('theme-button'), lightTheme = 'light-theme', iconTheme = 'uil-sun', selectedTheme = localStorage.getItem('selected-theme'), selectedIcon = localStorage.getItem('selected-icon'), getCurrentTheme = () => document.body.classList.contains(lightTheme) ? 'light' : 'dark', getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-sun' : 'uil-moon';
+            if (selectedTheme) { document.body.classList[selectedTheme === 'light' ? 'add' : 'remove'](lightTheme); themeButton.classList[selectedIcon === 'uil-sun' ? 'add' : 'remove'](iconTheme); }
+            themeButton.addEventListener('click', () => { document.body.classList.toggle(lightTheme); themeButton.classList.toggle(iconTheme); localStorage.setItem('selected-theme', getCurrentTheme()); localStorage.setItem('selected-icon', getCurrentIcon()); });
+            
+            const sr = ScrollReveal({ origin: 'top', distance: '60px', duration: 2500, delay: 200 });
+            sr.reveal('.section__title, .section__subtitle', { interval: 100 });
+            sr.reveal('.home__blob', { delay: 400 });
+            sr.reveal('.home__data', { delay: 500, origin: 'bottom' });
+            sr.reveal('.home__social', { delay: 600, origin: 'bottom', interval: 100 });
+            sr.reveal('#about div:first-child, #contact div:first-child', { origin: 'left' });
+            sr.reveal('#about div:last-child, #contact form', { origin: 'right' });
+            sr.reveal('.skills__content, .certification__content, .projects-swiper', { interval: 100 });
+        });
+    </script>
+</body>
+</html>
