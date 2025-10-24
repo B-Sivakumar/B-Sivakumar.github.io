@@ -95,20 +95,14 @@
         /*=============== BASE ===============*/
         html { scroll-behavior: smooth; }
         body {
-            margin: 0 0 var(--header-height) 0; /* Bottom margin for mobile nav */
+            /* --- FIXED MARGIN --- */
+            /* Set top margin for the fixed top nav bar on ALL screen sizes */
+            margin: var(--header-height) 0 0 0; 
             font-family: var(--body-font);
             font-size: var(--normal-font-size);
             background-color: var(--body-color);
             color: var(--text-color);
         }
-
-        /* --- ADDED THIS FIX for desktop top margin --- */
-        @media screen and (min-width: 768px) {
-            body {
-                margin: var(--header-height) 0 0 0; /* Top margin for desktop nav */
-            }
-        }
-        /* --- END FIX --- */
 
         /*=============== REUSABLE CSS CLASSES ===============*/
         .section { padding: 2rem 0 4rem; }
@@ -124,7 +118,8 @@
         .button__icon { margin-left: var(--mb-0-5); }
 
         /*=============== Custom Styles ===============*/
-        .scroll-header { box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15); }
+        /* --- Renamed scroll-header to shadow-header for clarity --- */
+        .shadow-header { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15); }
         .active-link { color: var(--first-color); }
         .home__blob { fill: var(--first-color); }
         .home__blob-img { width: 180px; }
@@ -140,7 +135,6 @@
             position: relative; background-color: var(--container-color); padding: 2rem;
             border-radius: .5rem; max-width: 90%; max-height: 90vh;
         }
-        /* Style for the iframe (replaces modal-img) */
         .certification__modal-iframe {
             width: 85vw; 
             height: 80vh; 
@@ -162,62 +156,47 @@
 </head>
 <body class="text-[var(--text-color)]">
     
-    <header class="w-full fixed bottom-0 left-0 z-50 bg-[var(--body-color)] md:top-0 md:bottom-auto" id="header">
-        <nav class="h-[var(--header-height)] md:h-[calc(var(--header-height)_+_1.5rem)] flex justify-center md:justify-between items-center container mx-auto px-4">
+    <!--============ HEADER / NAV --- FULLY FIXED TO TOP ============-->
+    <!-- Made header fixed to top on all devices -->
+    <header class="w-full fixed top-0 left-0 z-50 bg-[var(--body-color)]" id="header">
+        <nav class="h-[var(--header-height)] flex justify-between items-center container mx-auto px-4">
             
-            <a href="#" class="hidden md:inline text-[var(--title-color)] font-medium hover:text-[var(--first-color)] transition-colors">Sivakumar B</a>
+            <!-- Brand name, always visible -->
+            <a href="#" class="text-[var(--title-color)] font-medium hover:text-[var(--first-color)] transition-colors">Sivakumar B</a>
             
-            <div class="w-full md:w-auto" id="nav-menu"> 
-                <ul class="flex w-full justify-around md:w-auto md:flex md:gap-x-8">
-                    <li>
-                        <a href="#home" class="nav__link active-link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-estate text-xl"></i> <span class="hidden md:inline">Home</span> </a>
-                    </li>
-                    <li>
-                        <a href="#about" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-user text-xl"></i>
-                            <span class="hidden md:inline">About</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#skills" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-file-alt text-xl"></i>
-                            <span class="hidden md:inline">Skills</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#experience" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-briefcase-alt text-xl"></i>
-                            <span class="hidden md:inline">Experience</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#projects" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-scenery text-xl"></i>
-                            <span class="hidden md:inline">Projects</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#certifications" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-award text-xl"></i>
-                            <span class="hidden md:inline">Certs</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#contact" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-message text-xl"></i>
-                            <span class="hidden md:inline">Contact</span>
-                        </a>
-                    </li>
-                </ul>
+            <!-- This div contains the links AND the theme button -->
+            <div class="flex items-center gap-x-4">
+
+                <!-- Nav Menu (Links) -->
+                <!-- Hidden on mobile, shown on desktop -->
+                <div class="hidden md:block" id="nav-menu"> 
+                    <ul class="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
+                        <li><a href="#home" class="nav__link active-link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Home</a></li>
+                        <li><a href="#about" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">About</a></li>
+                        <li><a href="#skills" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Skills</a></li>
+                        <li><a href="#experience" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Experience</a></li>
+                        <li><a href="#projects" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Projects</a></li>
+                        <li><a href="#certifications" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Certs</a></li>
+                        <li><a href="#contact" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Theme Change Button, always visible -->
+                <i class="uil uil-moon change-theme text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="theme-button"></i>
+
+                <!-- Hamburger Menu Button, ONLY visible on mobile -->
+                <div class="md:hidden text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="nav-toggle">
+                    <i class="uil uil-apps"></i>
+                </div>
             </div>
-            
-            <i class="hidden md:inline uil uil-moon change-theme text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="theme-button"></i>
         </nav>
     </header>
+    <!--==================== END HEADER ====================-->
+
     <main class="container mx-auto px-4">
-        <section class="section min-h-screen grid items-center" id="home">
-            <div class="grid gap-8 md:grid-cols-[1fr_max-content_max-content] md:items-center pt-16">
+        <!-- Add pt-8 (padding-top) to the home section to clear the new fixed header -->
+        <section class="section min-h-screen grid items-center pt-8" id="home">
+            <div class="grid gap-8 md:grid-cols-[1fr_max-content_max-content] md:items-center">
                 <div class="grid content-center md:order-1 relative h-full">
                     <div class="home__social flex flex-col items-center gap-y-4">
                         <a href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank" class="home__social-icon text-xl text-[var(--first-color)] transition-transform duration-300 hover:-translate-y-1"><i class="uil uil-linkedin-alt"></i></a>
@@ -226,7 +205,11 @@
                 </div>
                 <div class="md:order-3 text-center md:text-left">
                     <h1 class="text-4xl md:text-5xl font-semibold text-[var(--title-color)]">Hi, I'm Sivakumar B</h1>
-                    <h3 class="text-lg md:text-xl font-medium mb-2 text-[var(--text-color)] h-6"><span class="auto-type"></span></h3>
+                    
+                    <!-- --- FIXED TEXT CUT-OFF --- -->
+                    <!-- Removed h-6, added min-h-[1.5em] to prevent cut-off text -->
+                    <h3 class="text-lg md:text-xl font-medium mb-2 text-[var(--text-color)] min-h-[1.5em]"><span class="auto-type"></span></h3>
+                    
                     <p class="mb-8">Seeking to leverage my IT foundation and hands-on experience in innovative projects, contributing to impactful tech solutions while pursuing continuous growth.</p>
                     <a href="#contact" class="button button--flex">Contact Me <i class="uil uil-message button__icon"></i></a>
                 </div>
@@ -343,6 +326,7 @@
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center">
                     <h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Object Oriented Programming</h3>
                     <p class="text-xs mb-2">NPTEL</p>
+                    <!-- Make sure you have this PDF in a folder named "certificates" -->
                     <a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="certificates/SIVAKUMAR B- RAG LAB CERTIFICATE.pdf">
                         See Credential <i class="uil uil-arrow-right text-xs"></i>
                     </a>
@@ -351,7 +335,7 @@
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Software Engineering Lite</h3><p class="text-xs mb-2">JP Morgan Chase</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intro to Cloud Computing</h3><p class="text-xs mb-2">IBM – Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Data Science Foundations</h3><p class="text-xs mb-2">NASBA – LinkedIn</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
-                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intro to Java Programming</h3><p class="text-xs mb-2">Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
+                <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intro to Java Programming</h3><p class="text-xs mb-2">Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="httpsf://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intermediate OOP with Java</h3><p class="text-xs mb-2">Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Adv. Relational Database & SQL</h3><p class="text-xs mb-2">Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Business English Writing</h3><p class="text-xs mb-2">HKUST – Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
@@ -411,37 +395,74 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            /*============ MOBILE NAV TOGGLE ============*/
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav__link');
+            const header = document.getElementById('header');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    // Toggle the 'hidden' class on the menu
+                    navMenu.classList.toggle('hidden');
+                    // --- This makes the mobile menu stack vertically ---
+                    navMenu.classList.add(
+                        'absolute', 'top-full', 'left-0', 'w-full', 
+                        'bg-[var(--body-color)]', 'shadow-md', 'py-4'
+                    );
+                });
+            }
+
+            // --- Close mobile menu when a link is clicked ---
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu && !navMenu.classList.contains('md:block')) { // Only if mobile menu is open
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'absolute', 'top-full', 'left-0', 'w-full', 
+                            'bg-[var(--body-color)]', 'shadow-md', 'py-4'
+                        );
+                    }
+                });
+            });
+
+
+            /*============ CERTIFICATION MODAL ============*/
             const skillsHeaders = document.querySelectorAll('.skills__header');
             skillsHeaders.forEach(el => el.addEventListener('click', () => el.parentElement.classList.toggle('skills__open')));
             
-            /*============ CORRECTED MODAL JS ============*/
             const modal = document.getElementById('certification-modal'),
-                  modalIframe = document.getElementById('modal-iframe'), // Changed from modalImg
+                  modalIframe = document.getElementById('modal-iframe'),
                   modalClose = document.getElementById('modal-close'),
                   certButtons = document.querySelectorAll('.certification__button');
 
             certButtons.forEach(button => button.addEventListener('click', e => {
                 e.preventDefault();
-                modalIframe.src = button.dataset.src; // Changed from modalImg
+                modalIframe.src = button.dataset.src;
                 modal.classList.add('active-modal');
             }));
 
             const closeModal = () => {
                 modal.classList.remove('active-modal');
-                modalIframe.src = ""; // Added this to clear the iframe when you close it
+                modalIframe.src = "";
             };
 
             modalClose.addEventListener('click', closeModal);
             modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
             
-            /*============ OTHER JS ============*/
+            /*============ SWIPER JS ============*/
             let swiperProjects = new Swiper(".projects-swiper", { cssMode: true, loop: true, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, pagination: { el: ".swiper-pagination", clickable: true } });
             
+            /*============ SCROLL ACTIVE LINK ============*/
             const sections = document.querySelectorAll('section[id]');
             function scrollActive() {
                 const scrollY = window.pageYOffset;
                 sections.forEach(current => {
-                    const sectionHeight = current.offsetHeight, sectionTop = current.offsetTop - 50, sectionId = current.getAttribute('id'), link = document.querySelector('#nav-menu a[href*=' + sectionId + ']');
+                    const sectionHeight = current.offsetHeight, 
+                          sectionTop = current.offsetTop - 58, // Adjusted for header height
+                          sectionId = current.getAttribute('id'), 
+                          link = document.querySelector('#nav-menu a[href*=' + sectionId + ']');
+                    
                     if (link) { 
                         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                             link.classList.add('active-link');
@@ -453,18 +474,21 @@
             }
             window.addEventListener('scroll', scrollActive);
             
+            /*============ HEADER SHADOW ON SCROLL ============*/
             function scrollHeader() { 
-                const nav = document.getElementById('header'); 
-                if (this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header'); 
+                if (this.scrollY >= 80) header.classList.add('shadow-header'); else header.classList.remove('shadow-header'); 
             }
             window.addEventListener('scroll', scrollHeader);
             
+            /*============ TYPED JS (Homepage Text) ============*/
             new Typed('.auto-type', { strings: ['IT Student', 'Aspiring Developer', 'Tech Enthusiast'], typeSpeed: 100, backSpeed: 60, loop: true });
             
+            /*============ LIGHT/DARK THEME ============*/
             const themeButton = document.getElementById('theme-button'), lightTheme = 'light-theme', iconTheme = 'uil-sun', selectedTheme = localStorage.getItem('selected-theme'), selectedIcon = localStorage.getItem('selected-icon'), getCurrentTheme = () => document.body.classList.contains(lightTheme) ? 'light' : 'dark', getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-sun' : 'uil-moon';
             if (selectedTheme) { document.body.classList[selectedTheme === 'light' ? 'add' : 'remove'](lightTheme); themeButton.classList[selectedIcon === 'uil-sun' ? 'add' : 'remove'](iconTheme); }
             themeButton.addEventListener('click', () => { document.body.classList.toggle(lightTheme); themeButton.classList.toggle(iconTheme); localStorage.setItem('selected-theme', getCurrentTheme()); localStorage.setItem('selected-icon', getCurrentIcon()); });
             
+            /*============ SCROLL REVEAL ANIMATION ============*/
             const sr = ScrollReveal({ origin: 'top', distance: '60px', duration: 2500, delay: 200 });
             sr.reveal('.section__title, .section__subtitle', { interval: 100 });
             sr.reveal('.home__blob', { delay: 400 });
