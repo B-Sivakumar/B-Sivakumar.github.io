@@ -95,9 +95,10 @@
         /*=============== BASE ===============*/
         html { scroll-behavior: smooth; }
         body {
-            /* --- FIXED MARGIN --- */
-            /* Set top margin for the fixed top nav bar on ALL screen sizes */
-            margin: var(--header-height) 0 0 0; 
+            /* --- THIS IS THE CSS FIX --- */
+            /* This adds padding to the top of the body, equal to the header's height. */
+            /* This pushes all your content down so it is not hidden by the fixed top nav bar. */
+            padding-top: var(--header-height);
             font-family: var(--body-font);
             font-size: var(--normal-font-size);
             background-color: var(--body-color);
@@ -118,9 +119,30 @@
         .button__icon { margin-left: var(--mb-0-5); }
 
         /*=============== Custom Styles ===============*/
-        /* --- Renamed scroll-header to shadow-header for clarity --- */
         .shadow-header { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15); }
         .active-link { color: var(--first-color); }
+        
+        /* --- Mobile Menu Pop-out Style --- */
+        .mobile-menu {
+            position: absolute;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            background-color: var(--body-color);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-150%); /* Start hidden above screen */
+        }
+        .show-menu {
+            transform: translateY(0); /* Slide into view */
+        }
+        .mobile-menu .nav__link {
+            display: block;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
         .home__blob { fill: var(--first-color); }
         .home__blob-img { width: 180px; }
         .home__social-icon:hover { color: var(--first-color-alt); }
@@ -156,21 +178,15 @@
 </head>
 <body class="text-[var(--text-color)]">
     
-    <!--============ HEADER / NAV --- FULLY FIXED TO TOP ============-->
-    <!-- Made header fixed to top on all devices -->
     <header class="w-full fixed top-0 left-0 z-50 bg-[var(--body-color)]" id="header">
         <nav class="h-[var(--header-height)] flex justify-between items-center container mx-auto px-4">
             
-            <!-- Brand name, always visible -->
             <a href="#" class="text-[var(--title-color)] font-medium hover:text-[var(--first-color)] transition-colors">Sivakumar B</a>
             
-            <!-- This div contains the links AND the theme button -->
             <div class="flex items-center gap-x-4">
 
-                <!-- Nav Menu (Links) -->
-                <!-- Hidden on mobile, shown on desktop -->
-                <div class="hidden md:block" id="nav-menu"> 
-                    <ul class="flex flex-col md:flex-row gap-y-4 md:gap-x-8">
+                <div class="hidden md:flex" id="nav-menu-desktop"> 
+                    <ul class="flex items-center gap-x-8">
                         <li><a href="#home" class="nav__link active-link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Home</a></li>
                         <li><a href="#about" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">About</a></li>
                         <li><a href="#skills" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Skills</a></li>
@@ -181,22 +197,28 @@
                     </ul>
                 </div>
 
-                <!-- Theme Change Button, always visible -->
                 <i class="uil uil-moon change-theme text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="theme-button"></i>
 
-                <!-- Hamburger Menu Button, ONLY visible on mobile -->
-                <div class="md:hidden text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="nav-toggle">
-                    <i class="uil uil-apps"></i>
-                </div>
+                <div class="block md:hidden text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="nav-toggle">
+                    <i class="uil uil-apps" id="nav-icon"></i> </div>
             </div>
         </nav>
-    </header>
-    <!--==================== END HEADER ====================-->
 
+        <div class="md:hidden mobile-menu" id="nav-menu-mobile"> 
+            <ul class="flex flex-col items-center gap-y-4">
+                <li><a href="#home" class="nav__link active-link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Home</a></li>
+                <li><a href="#about" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">About</a></li>
+                <li><a href="#skills" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Skills</a></li>
+                <li><a href="#experience" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Experience</a></li>
+                <li><a href="#projects" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Projects</a></li>
+                <li><a href="#certifications" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Certs</a></li>
+                <li><a href="#contact" class="nav__link font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">Contact</a></li>
+            </ul>
+        </div>
+    </header>
     <main class="container mx-auto px-4">
-        <!-- Add pt-8 (padding-top) to the home section to clear the new fixed header -->
-        <section class="section min-h-screen grid items-center pt-8" id="home">
-            <div class="grid gap-8 md:grid-cols-[1fr_max-content_max-content] md:items-center">
+        <section class="section min-h-screen grid items-center" id="home">
+            <div class="grid gap-8 md:grid-cols-[1fr_max-content_max-content] md:items-center pt-8 md:pt-16">
                 <div class="grid content-center md:order-1 relative h-full">
                     <div class="home__social flex flex-col items-center gap-y-4">
                         <a href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank" class="home__social-icon text-xl text-[var(--first-color)] transition-transform duration-300 hover:-translate-y-1"><i class="uil uil-linkedin-alt"></i></a>
@@ -206,9 +228,7 @@
                 <div class="md:order-3 text-center md:text-left">
                     <h1 class="text-4xl md:text-5xl font-semibold text-[var(--title-color)]">Hi, I'm Sivakumar B</h1>
                     
-                    <!-- --- FIXED TEXT CUT-OFF --- -->
-                    <!-- Removed h-6, added min-h-[1.5em] to prevent cut-off text -->
-                    <h3 class="text-lg md:text-xl font-medium mb-2 text-[var(--text-color)] min-h-[1.5em]"><span class="auto-type"></span></h3>
+                    <h3 class="text-lg md:text-xl font-medium mb-2 text-[var(--text-color)]"><span class="auto-type"></span></h3>
                     
                     <p class="mb-8">Seeking to leverage my IT foundation and hands-on experience in innovative projects, contributing to impactful tech solutions while pursuing continuous growth.</p>
                     <a href="#contact" class="button button--flex">Contact Me <i class="uil uil-message button__icon"></i></a>
@@ -326,7 +346,6 @@
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center">
                     <h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Object Oriented Programming</h3>
                     <p class="text-xs mb-2">NPTEL</p>
-                    <!-- Make sure you have this PDF in a folder named "certificates" -->
                     <a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="certificates/SIVAKUMAR B- RAG LAB CERTIFICATE.pdf">
                         See Credential <i class="uil uil-arrow-right text-xs"></i>
                     </a>
@@ -395,33 +414,35 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            /*============ MOBILE NAV TOGGLE ============*/
+            /*============ MOBILE NAV TOGGLE (NEW) ============*/
             const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.getElementById('nav-menu');
-            const navLinks = document.querySelectorAll('.nav__link');
+            const navIcon = document.getElementById('nav-icon');
+            const mobileMenu = document.getElementById('nav-menu-mobile');
+            const mobileNavLinks = document.querySelectorAll('#nav-menu-mobile .nav__link');
             const header = document.getElementById('header');
 
-            if (navToggle && navMenu) {
+            if (navToggle && mobileMenu && navIcon) {
+                // Show/hide menu when hamburger icon is clicked
                 navToggle.addEventListener('click', () => {
-                    // Toggle the 'hidden' class on the menu
-                    navMenu.classList.toggle('hidden');
-                    // --- This makes the mobile menu stack vertically ---
-                    navMenu.classList.add(
-                        'absolute', 'top-full', 'left-0', 'w-full', 
-                        'bg-[var(--body-color)]', 'shadow-md', 'py-4'
-                    );
+                    mobileMenu.classList.toggle('show-menu');
+                    // Change icon from hamburger to 'X' (and back)
+                    if (mobileMenu.classList.contains('show-menu')) {
+                        navIcon.classList.remove('uil-apps');
+                        navIcon.classList.add('uil-times');
+                    } else {
+                        navIcon.classList.remove('uil-times');
+                        navIcon.classList.add('uil-apps');
+                    }
                 });
             }
 
-            // --- Close mobile menu when a link is clicked ---
-            navLinks.forEach(link => {
+            // Close mobile menu when a link is clicked
+            mobileNavLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    if (navMenu && !navMenu.classList.contains('md:block')) { // Only if mobile menu is open
-                        navMenu.classList.add('hidden');
-                        navMenu.classList.remove(
-                            'absolute', 'top-full', 'left-0', 'w-full', 
-                            'bg-[var(--body-color)]', 'shadow-md', 'py-4'
-                        );
+                    if (mobileMenu.classList.contains('show-menu')) {
+                        mobileMenu.classList.remove('show-menu');
+                        navIcon.classList.remove('uil-times');
+                        navIcon.classList.add('uil-apps');
                     }
                 });
             });
@@ -455,20 +476,24 @@
             
             /*============ SCROLL ACTIVE LINK ============*/
             const sections = document.querySelectorAll('section[id]');
+            // Get all nav links (desktop and mobile)
+            const allNavLinks = document.querySelectorAll('.nav__link'); 
+
             function scrollActive() {
                 const scrollY = window.pageYOffset;
+                
                 sections.forEach(current => {
                     const sectionHeight = current.offsetHeight, 
                           sectionTop = current.offsetTop - 58, // Adjusted for header height
-                          sectionId = current.getAttribute('id'), 
-                          link = document.querySelector('#nav-menu a[href*=' + sectionId + ']');
+                          sectionId = current.getAttribute('id');
                     
-                    if (link) { 
-                        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                            link.classList.add('active-link');
-                        } else {
-                            link.classList.remove('active-link');
-                        }
+                    // Find all links (desktop and mobile) that point to this section
+                    const correspondingLinks = document.querySelectorAll('.nav__link[href*=' + sectionId + ']');
+
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        correspondingLinks.forEach(link => link.classList.add('active-link'));
+                    } else {
+                        correspondingLinks.forEach(link => link.classList.remove('active-link'));
                     }
                 });
             }
