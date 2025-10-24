@@ -1,514 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sivakumar B – Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sivakumar B – Portfolio</title>
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-    <!-- Swiper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        /* ==== VARIABLES ==== */
-        :root{
-            --header-height:3rem;
-            --hue:220;
-            --first:hsl(var(--hue),69%,61%);
-            --first-alt:hsl(var(--hue),57%,53%);
-            --title:hsl(var(--hue),8%,95%);
-            --text:hsl(var(--hue),8%,75%);
-            --body:hsl(var(--hue),28%,12%);
-            --container:hsl(var(--hue),29%,16%);
-            --input:hsl(var(--hue),29%,16%);
-            --scroll-bar:hsl(var(--hue),12%,48%);
-            --scroll-thumb:hsl(var(--hue),12%,36%);
-            --font:'Poppins',sans-serif;
-            --big:2rem;--h1:1.5rem;--h2:1.25rem;--h3:1.125rem;
-            --normal:.938rem;--small:.813rem;--smaller:.75rem;
-        }
-        @media(min-width:968px){
-            :root{--big:3rem;--h1:2.25rem;--h2:1.5rem;--h3:1.25rem;--normal:1rem;--small:.875rem;--smaller:.813rem;}
-        }
-        /* Light theme */
-        body.light{--first-alt:hsl(var(--hue),30%,8%);--title:hsl(var(--hue),8%,15%);--text:hsl(var(--hue),8%,45%);
-            --input:hsl(var(--hue),70%,96%);--body:hsl(var(--hue),60%,99%);--container:#fff;
-            --scroll-bar:hsl(var(--hue),12%,90%);--scroll-thumb:hsl(var(--hue),12%,80%);}
+  <!-- ScrollReveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
 
-        /* ==== BASE ==== */
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-        html{scroll-behavior:smooth;}
-        body{font-family:var(--font);font-size:var(--normal);background:var(--body);color:var(--text);
-            padding-top:var(--header-height);transition:background .4s,color .4s;}
-        img{max-width:100%;display:block;}
-        a{color:inherit;text-decoration:none;}
-        ul{list-style:none;}
+  <style>
+    :root{
+      --header-height:3.5rem;
+      --hue:220;
+      --accent: hsl(var(--hue),69%,61%);
+      --accent-2: hsl(var(--hue),57%,53%);
+      --bg: hsl(var(--hue),28%,12%);
+      --card: hsl(var(--hue),29%,16%);
+      --title: hsl(var(--hue),8%,95%);
+      --text: hsl(var(--hue),8%,75%);
+      --input: hsl(var(--hue),29%,16%);
+      --radius: 12px;
+      --font: 'Poppins', sans-serif;
+      --container-w: 1200px;
+    }
 
-        /* ==== LAYOUT ==== */
-        .container{max-width:1200px;margin:auto;padding:0 1rem;}
-        .section{padding:4rem 0 2rem;text-align:center;}
-        .section__title{font-size:var(--h1);color:var(--title);margin-bottom:.5rem;}
-        .section__subtitle{display:block;font-size:var(--small);color:var(--first);margin-bottom:2rem;}
+    body.light{
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --title: #0f172a;
+      --text: #334155;
+      --accent: #0ea5a4;
+    }
 
-        .btn{display:inline-flex;align-items:center;background:var(--first);color:#fff;
-            padding:.75rem 1.5rem;border-radius:.5rem;font-weight:500;transition:.3s;gap:.5rem;}
-        .btn:hover{background:var(--first-alt);}
-        .btn--small{padding:.5rem 1rem;font-size:var(--small);}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:var(--font);background:var(--bg);color:var(--text);
+      padding-top:var(--header-height);-webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
 
-        /* ==== HEADER ==== */
-        #header{position:fixed;top:0;left:0;width:100%;background:var(--body);z-index:100;
-            transition:box-shadow .3s;}
-        .nav{height:var(--header-height);display:flex;justify-content:space-between;align-items:center;}
-        .nav__logo{font-weight:600;color:var(--title);}
-        .nav__list{display:flex;gap:2rem;}
-        .nav__link{color:var(--title);font-weight:500;transition:.3s;}
-        .nav__link:hover,.nav__link.active{color:var(--first);}
-        .nav__toggle{display:none;cursor:pointer;color:var(--title);font-size:1.25rem;}
-        .shadow-header{box-shadow:0 1px 4px rgba(0,0,0,.15);}
+    .container{max-width:var(--container-w);margin:0 auto;padding:0 1rem}
 
-        /* ==== MOBILE MENU ==== */
-        @media(max-width:767px){
-            .nav__toggle{display:block;}
-            .nav__list{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;
-                background:var(--body);padding:1.5rem 0;box-shadow:0 2px 4px rgba(0,0,0,.15);
-                transform:translateY(-150%);transition:transform .3s ease;}
-            .nav__list.show{transform:translateY(0);}
-            .nav__link{display:block;padding:.5rem 0;text-align:center;}
-        }
+    /* Header */
+    header#header{
+      position:fixed;left:0;right:0;top:0;height:var(--header-height);
+      background:transparent;z-index:120;backdrop-filter: blur(6px);
+      display:flex;align-items:center;justify-content:center;
+      transition:background .25s, box-shadow .25s;
+    }
+    header.scrolled{background:rgba(0,0,0,.18);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .nav{width:100%;max-width:var(--container-w);display:flex;align-items:center;justify-content:space-between;padding:0 .75rem}
+    .nav__logo{font-weight:700;color:var(--title);letter-spacing:0.4px}
+    .nav__list{display:flex;gap:1rem;align-items:center}
+    .nav__link{color:var(--title);padding:.5rem .75rem;border-radius:8px;font-weight:500;opacity:.95}
+    .nav__link:hover,.nav__link.active{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));color:var(--accent)}
+    .nav-actions{display:flex;gap:0.75rem;align-items:center}
+    .icon-btn{font-size:1.2rem;cursor:pointer;color:var(--title);padding:.35rem;border-radius:8px}
+    .resume-btn{background:var(--accent);color:#fff;padding:.45rem .8rem;border-radius:10px;font-weight:600}
 
-        /* ==== HOME ==== */
-        .home{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;min-height:calc(100vh - var(--header-height));}
-        .home__social{display:flex;gap:1rem;flex-direction:column;align-items:center;}
-        .home__social a{color:var(--first);font-size:1.5rem;transition:.3s;}
-        .home__social a:hover{transform:translateY(-4px);}
-        .home__blob{width:200px;fill:var(--first);}
-        @media(min-width:768px){
-            .home{grid-template-columns:repeat(3,1fr);gap:3rem;}
-            .home__social{order:1;align-self:start;}
-            .home__data{order:2;text-align:left;}
-            .home__img{order:3;justify-self:center;}
-        }
+    /* Mobile */
+    .nav__toggle{display:none;font-size:1.25rem}
+    @media(max-width:900px){
+      .nav__list{display:none}
+      .nav__toggle{display:block}
+    }
 
-        /* ==== ABOUT ==== */
-        .about__grid{display:grid;gap:2rem;}
-        @media(min-width:768px){.about__grid{grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}}
-        .edu-card{background:var(--container);padding:1.5rem;border-radius:.75rem;text-align:center;}
-        .edu-card h3{font-size:1.1rem;color:var(--title);margin-bottom:.5rem;}
+    /* Hero / Home */
+    .section{padding:4.5rem 0}
+    .home{display:grid;gap:1.25rem;align-items:center;min-height:calc(100vh - var(--header-height))}
+    @media(min-width:768px){.home{grid-template-columns:1fr 1fr;gap:2.5rem}}
+    .home__left{padding-top:1rem}
+    .home__title{font-size:clamp(1.6rem,4vw,2.5rem);color:var(--title);margin-bottom:.5rem}
+    .home__subtitle{color:var(--text);margin-bottom:1rem;max-width:640px;line-height:1.6}
+    .home__cta{display:flex;gap:.75rem;align-items:center;margin-top:1rem}
+    .home__socials{display:flex;gap:.6rem;margin-top:1rem}
+    .social-icon{width:44px;height:44px;border-radius:10px;background:var(--card);display:inline-grid;place-items:center;color:var(--accent);font-size:1.15rem}
 
-        /* ==== SKILLS ==== */
-        .skills__grid{display:grid;gap:1.5rem;}
-        @media(min-width:768px){.skills__grid{grid-template-columns:2fr 1fr;}}
-        .skill-box{background:var(--container);padding:1.5rem;border-radius:.75rem;}
-        .skill-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
-        .skill-header i{color:var(--first);font-size:1.5rem;transition:.3s;}
-        .skill-header.open i{transform:rotate(-180deg);}
-        .skill-list{margin-top:1rem;display:grid;gap:.75rem;}
-        .soft-list{grid-template-columns:repeat(2,1fr);gap:.5rem;font-size:.9rem;}
+    .home__card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border-radius:18px;padding:1rem;display:flex;align-items:center;gap:1rem;
+      max-width:420px;border:1px solid rgba(255,255,255,0.03)
+    }
 
-        /* ==== EXPERIENCE ==== */
-        .exp-card{background:var(--container);padding:2rem;border-radius:.75rem;max-width:600px;margin:auto;}
+    /* About */
+    .section__title{font-size:1.5rem;color:var(--title);margin-bottom:.25rem}
+    .section__subtitle{display:block;color:var(--accent);margin-bottom:1.25rem}
+    .about__grid{display:grid;gap:1rem}
+    @media(min-width:768px){.about__grid{grid-template-columns:1fr 1fr;align-items:start;gap:2rem}}
+    .edu-card{background:var(--card);padding:1.15rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .edu-card h3{color:var(--title);margin-bottom:.25rem}
 
-        /* ==== PROJECTS ==== */
-        .swiper-button-next,.swiper-button-prev{color:var(--first)!important;}
-        .swiper-pagination-bullet-active{background:var(--first)!important;}
-        .project-slide{background:var(--container);padding:1.5rem;border-radius:.75rem;display:grid;gap:1.5rem;}
-        @media(min-width:768px){.project-slide{grid-template-columns:1fr 1fr;align-items:center;}}
+    /* Skills */
+    .skills__grid{display:grid;gap:1rem}
+    @media(min-width:768px){.skills__grid{grid-template-columns:2fr 1fr}}
+    .skill-box{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .skill-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+    .skill-list{margin-top:.75rem;display:grid;gap:.5rem}
 
-        /* ==== CERTIFICATIONS ==== */
-        .certs-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
-        .cert-card{background:var(--container);padding:1rem;border-radius:.5rem;text-align:center;}
-        .cert-card a{color:var(--first);font-size:.875rem;}
+    /* Experience */
+    .exp-card{background:var(--card);padding:1.25rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:760px;margin:0 auto}
 
-        /* ==== MODAL ==== */
-        .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;
-            opacity:0;visibility:hidden;transition:.3s;z-index:1000;}
-        .modal.active{opacity:1;visibility:visible;}
-        .modal__content{position:relative;background:var(--container);padding:1.5rem;border-radius:.75rem;
-            max-width:90%;max-height:90vh;overflow:hidden;}
-        .modal__close{position:absolute;top:1rem;right:1rem;font-size:1.5rem;color:var(--first);cursor:pointer;}
-        .modal__iframe{width:100%;height:80vh;border:none;border-radius:.5rem;}
+    /* Projects / Swiper */
+    .projects-swiper{padding:1rem 0}
+    .project-slide{background:var(--card);padding:1rem;border-radius:12px;display:grid;gap:.75rem;border:1px solid rgba(255,255,255,0.03)}
+    @media(min-width:768px){.project-slide{grid-template-columns:1fr 1fr;align-items:center}}
+    .project-slide img{border-radius:8px}
 
-        /* ==== CONTACT ==== */
-        .contact__grid{display:grid;gaps:2rem;}
-        @media(min-width:768px){.contact__grid{grid-template-columns:1fr 1fr;gap:3rem;}}
-        .contact__info{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
-        .contact__info i{font-size:1.5rem;color:var(--first);}
-        .form-group{background:var(--input);padding:1rem;border-radius:.5rem;}
-        .form-group label{display:block;font-size:.75rem;color:var(--title);margin-bottom:.25rem;}
-        .form-group input,.form-group textarea{width:100%;background:transparent;border:none;outline:none;color:var(--text);font-size:.875rem;}
-        .form-group textarea{resize:none;height:100px;}
+    /* Certs */
+    .certs-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+    .cert-card{background:var(--card);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .cert-btn{display:inline-block;margin-top:.5rem;color:var(--accent);cursor:pointer;font-weight:600}
 
-        /* ==== FOOTER ==== */
-        footer{background:var(--container);padding:2rem 0;margin-top:3rem;border-top:1px solid rgba(255,255,255,.1);}
-        .footer__social a{font-size:1.25rem;color:var(--title);margin:0 .5rem;transition:.3s;}
-        .footer__social a:hover{color:var(--first);}
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);z-index:200}
+    .modal.active{display:flex}
+    .modal__content{width:94%;max-width:900px;background:var(--card);border-radius:12px;padding:1rem;position:relative;border:1px solid rgba(255,255,255,0.03)}
+    .modal__close{position:absolute;top:12px;right:12px;font-size:1.25rem;color:var(--accent);cursor:pointer}
+    .modal__iframe{width:100%;height:70vh;border-radius:8px;border:none}
 
-        /* ==== SCROLLBAR ==== */
-        ::-webkit-scrollbar{width:.6rem;background:var(--scroll-bar);}
-        ::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border-radius:.5rem;}
-    </style>
+    /* Contact */
+    .contact__grid{display:grid;gap:1rem}
+    @media(min-width:768px){.contact__grid{grid-template-columns:1fr 1fr}}
+    .contact__info{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Achievements / Testimonials */
+    .ach-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+    .card-small{background:var(--card);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Footer */
+    footer{padding:1.25rem 0;text-align:center;background:transparent;margin-top:2rem;color:var(--text);opacity:.9}
+
+    /* small tweaks */
+    .muted{color:rgba(255,255,255,0.55);font-size:.95rem}
+    .chip{display:inline-block;padding:.25rem .55rem;border-radius:999px;background:rgba(255,255,255,0.02);font-size:.85rem}
+
+    /* scrollbar */
+    ::-webkit-scrollbar{width:8px}
+    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:8px}
+
+  </style>
 </head>
 <body>
 
-<!-- ==================== HEADER ==================== -->
-<header id="header">
-    <nav class="container nav">
-        <a href="#" class="nav__logo">Sivakumar B</a>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="nav container">
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <div class="nav__logo">Sivakumar B</div>
+        
+      </div>
 
-        <!-- Desktop -->
-        <ul class="nav__list" id="nav-desktop">
-            <li><a href="#home" class="nav__link active">Home</a></li>
-            <li><a href="#about" class="nav__link">About</a></li>
-            <li><a href="#skills" class="nav__link">Skills</a></li>
-            <li><a href="#experience" class="nav__link">Experience</a></li>
-            <li><a href="#projects" class="nav__link">Projects</a></li>
-            <li><a href="#certifications" class="nav__link">Certs</a></li>
-            <li><a href="#contact" class="nav__link">Contact</a></li>
-        </ul>
+      <ul class="nav__list" id="nav-desktop">
+        <li><a class="nav__link active" href="#home">Home</a></li>
+        <li><a class="nav__link" href="#about">About</a></li>
+        <li><a class="nav__link" href="#skills">Skills</a></li>
+        <li><a class="nav__link" href="#experience">Experience</a></li>
+        <li><a class="nav__link" href="#projects">Projects</a></li>
+        <li><a class="nav__link" href="#certifications">Certs</a></li>
+        <li><a class="nav__link" href="#contact">Contact</a></li>
+      </ul>
 
-        <div style="display:flex;align-items:center;gap:1rem;">
-            <i class="uil uil-moon change-theme" id="theme-btn"></i>
-            <i class="uil uil-apps nav__toggle" id="nav-toggle"></i>
-        </div>
-    </nav>
-
-    <!-- Mobile menu (hidden by default) -->
-    <ul class="nav__list" id="nav-mobile"></ul>
-</header>
-
-<main class="container">
-
-    <!-- ==================== HOME ==================== -->
-    <section class="section home" id="home">
-        <div class="home__social">
-            <a href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank"><i class="uil uil-linkedin-alt"></i></a>
-            <a href="https://github.com/BSivakumar" target="_blank"><i class="uil uil-github-alt"></i></a>
-        </div>
-
-        <div class="home__data">
-            <h1 class="section__title" style="text-align:left;">Hi, I'm Sivakumar B</h1>
-            <h3 style="font-size:1.25rem;color:var(--text);margin:1rem 0;"><span class="auto-type"></span></h3>
-            <p style="max-width:500px;margin-bottom:1.5rem;">
-                Seeking to leverage my IT foundation and hands-on experience in innovative projects,
-                contributing to impactful tech solutions while pursuing continuous growth.
-            </p>
-            <a href="#contact" class="btn">Contact Me <i class="uil uil-message"></i></a>
-        </div>
-
-        <div class="home__img">
-            <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
-                <mask id="mask0" mask-type="alpha">
-                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 41.7223 152.469 24.3446 124.841C6.96687 97.2132 -8.98929 72.481 9.8583 49.9561C28.7058 27.4312 56.58 12.0821 87.7309 4.3482C118.882 -3.3857 154.553 10.8581 174.404 20.4884C182.994 25.0446 188.083 30.7383 190.312 36.4879Z"/>
-                </mask>
-                <g mask="url(#mask0)">
-                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 41.7223 152.469 24.3446 124.841C6.96687 97.2132 -8.98929 72.481 9.8583 49.9561C28.7058 27.4312 56.58 12.0821 87.7309 4.3482C118.882 -3.3857 154.553 10.8581 174.404 20.4884C182.994 25.0446 188.083 30.7383 190.312 36.4879Z"/>
-                    <image href="https://via.placeholder.com/180/282A36/fff?text=SB" x="12" y="12"/>
-                </g>
-            </svg>
-        </div>
-    </section>
-
-    <!-- ==================== ABOUT ==================== -->
-    <section class="section" id="about">
-        <h2 class="section__title">About Me</h2>
-        <span class="section__subtitle">My introduction & education</span>
-
-        <div class="about__grid">
-            <p style="text-align:left;">
-                A passionate and driven IT student with a strong foundation in programming and web development.
-                My internship at Dodovy honed my skills in digital marketing and startup operations.
-                I am eager to apply my technical knowledge and collaborative spirit to real-world challenges.
-            </p>
-
-            <div>
-                <div class="edu-card">
-                    <h3>B.Tech in Information Technology</h3>
-                    <p>Sri Krishna College of Technology, Coimbatore</p>
-                    <p style="font-size:.75rem;">(2024 – Present) | GPA: 8.25</p>
-                </div>
-                <div class="edu-card" style="margin-top:1rem;">
-                    <h3>Higher Secondary (HSC)</h3>
-                    <p>R.G. Matric Hr. Sec. School, Udumalpet</p>
-                    <p style="font-size:.75rem;">(2024) | 91.5% Aggregate</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== SKILLS ==================== -->
-    <section class="section" id="skills">
-        <h2 class="section__title">Skills</h2>
-        <span class="section__subtitle">My technical proficiency</span>
-
-        <div class="skills__grid">
-            <div class="skill-box">
-                <div class="skill-header">
-                    <div style="display:flex;align-items:center;gap:.75rem;">
-                        <i class="uil uil-brackets-curly"></i>
-                        <h3 style="margin:0;color:var(--title);">Technical Skills</h3>
-                    </div>
-                    <i class="uil uil-angle-down"></i>
-                </div>
-                <div class="skill-list">
-                    <p><strong>Programming:</strong> C++, Python, Java</p>
-                    <p><strong>Web Tech:</strong> HTML, CSS, JavaScript</p>
-                    <p><strong>Design:</strong> Canva, Draw.io, Photoshop</p>
-                    <p><strong>Tools:</strong> VS Code, WordPress, GitHub</p>
-                </div>
-            </div>
-
-            <div class="skill-box">
-                <div class="skill-header">
-                    <div style="display:flex;align-items:center;gap:.75rem;">
-                        <i class="uil uil-users-alt"></i>
-                        <h3 style="margin:0;color:var(--title);">Soft Skills</h3>
-                    </div>
-                    <i class="uil uil-angle-down"></i>
-                </div>
-                <div class="skill-list soft-list">
-                    <span>• Leadership</span><span>• Collaboration</span>
-                    <span>• Adaptability</span><span>• Problem-solving</span>
-                    <span>• Communication</span><span>• Conflict resolution</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== EXPERIENCE ==================== -->
-    <section class="section" id="experience">
-        <h2 class="section__title">Experience</h2>
-        <span class="section__subtitle">My professional journey</span>
-
-        <div class="exp-card">
-            <h3 style="margin-bottom:.5rem;">Digital Marketing Admin Intern</h3>
-            <p style="margin-bottom:1rem;">Dodovy (Startup) – Udumalpet <span style="font-size:.875rem;color:var(--text);">(2022 – 2023)</span></p>
-            <ul style="text-align:left;list-style:disc inside;gap:.5rem;display:grid;">
-                <li>Managed WordPress admin tasks, content updates and plugin handling.</li>
-                <li>Designed and executed social media campaigns on Instagram & WhatsApp.</li>
-                <li>Supported email marketing outreach and tracked engagement metrics.</li>
-                <li>Gained valuable experience in startup operations and digital branding.</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- ==================== PROJECTS ==================== -->
-    <section class="section" id="projects">
-        <h2 class="section__title">Projects</h2>
-        <span class="section__subtitle">Most recent work</span>
-
-        <div class="swiper projects-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide project-slide">
-                    <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=E-Commerce" alt="">
-                    <div>
-                        <h3>E-Commerce Website</h3>
-                        <p>Responsive platform built with HTML, CSS, and vanilla JavaScript.</p>
-                        <a href="#" class="btn btn--small">Demo <i class="uil uil-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="swiper-slide project-slide">
-                    <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=Task+Manager" alt="">
-                    <div>
-                        <h3>Task Management App</h3>
-                        <p>CLI tool in Python to add, delete and track daily tasks.</p>
-                        <a href="#" class="btn btn--small">GitHub <i class="uil uil-github-alt"></i></a>
-                    </div>
-                </div>
-                <div class="swiper-slide project-slide">
-                    <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=Personal+Blog" alt="">
-                    <div>
-                        <h3>Personal Blog</h3>
-                        <p>WordPress site with custom theme and plugins.</p>
-                        <a href="#" class="btn btn--small">View <i class="uil uil-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-button-next"><i class="uil uil-angle-right-b"></i></div>
-            <div class="swiper-button-prev"><i class="uil uil-angle-left-b"></i></div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
-
-    <!-- ==================== CERTIFICATIONS ==================== -->
-    <section class="section" id="certifications">
-        <h2 class="section__title">Certifications</h2>
-        <span class="section__subtitle">My credentials</span>
-
-        <div class="certs-grid">
-            <div class="cert-card">
-                <h3>Object Oriented Programming</h3>
-                <p>NPTEL</p>
-                <a href="#" class="cert-btn" data-src="certificates/SIVAKUMAR B- RAG LAB CERTIFICATE.pdf">See Credential</a>
-            </div>
-            <div class="cert-card">
-                <h3>Software Engineering Lite</h3>
-                <p>JP Morgan Chase</p>
-                <a href="#" class="cert-btn" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential</a>
-            </div>
-            <div class="cert-card">
-                <h3>Intro to Cloud Computing</h3>
-                <p>IBM – Coursera</p>
-                <a href="#" class="cert-btn" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential</a>
-            </div>
-            <div class="cert-card">
-                <h3>Data Science Foundations</h3>
-                <p>NASBA – LinkedIn</p>
-                <a href="#" class="cert-btn" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential</a>
-            </div>
-            <!-- Add more as needed -->
-        </div>
-
-        <!-- Modal -->
-        <div class="modal" id="cert-modal">
-            <div class="modal__content">
-                <i class="uil uil-times modal__close"></i>
-                <iframe class="modal__iframe" src=""></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== CONTACT ==================== -->
-    <section class="section" id="contact">
-        <h2 class="section__title">Contact Me</h2>
-        <span class="section__subtitle">Get in touch</span>
-
-        <div class="contact__grid">
-            <div>
-                <div class="contact__info"><i class="uil uil-phone"></i><div><h3>Call Me</h3><span>7708587882</span></div></div>
-                <div class="contact__info"><i class="uil uil-envelope"></i><div><h3>Email</h3><span>sivakumar290307@gmail.com</span></div></div>
-                <div class="contact__info"><i class="uil uil-map-marker"></i><div><h3>Location</h3><span>Coimbatore, India</span></div></div>
-            </div>
-
-            <form action="https://formspree.io/f/your_form_id" method="POST">
-                <div style="display:grid;gap:1rem;grid-template-columns:1fr;">
-                    <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr;">
-                        <div class="form-group"><label>Name</label><input type="text" name="name" required></div>
-                        <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
-                    </div>
-                    <div class="form-group"><label>Project</label><input type="text" name="project"></div>
-                    <div class="form-group"><label>Message</label><textarea name="message" required></textarea></div>
-                    <button type="submit" class="btn">Send Message <i class="uil uil-message"></i></button>
-                </div>
-            </form>
-        </div>
-    </section>
-</main>
-
-<!-- ==================== FOOTER ==================== -->
-<footer>
-    <div class="container" style="text-align:center;">
-        <h1 style="font-size:1.75rem;margin-bottom:.25rem;color:var(--title);">Sivakumar B</h1>
-        <p style="margin-bottom:1rem;">Aspiring Developer</p>
-        <div class="footer__social">
-            <a href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank"><i class="uil uil-linkedin-alt"></i></a>
-            <a href="https://github.com/BSivakumar" target="_blank"><i class="uil uil-github-alt"></i></a>
-        </div>
-        <p style="margin-top:1rem;font-size:.75rem;">© Sivakumar B. All rights reserved</p>
+      <div class="nav-actions">
+        <a class="resume-btn" href="resume.pdf" download>Download Resume</a>
+        <i class="uil uil-moon icon-btn" id="theme-btn" title="Toggle theme"></i>
+        <i class="uil uil-apps nav__toggle icon-btn" id="nav-toggle" title="Menu"></i>
+      </div>
     </div>
+
+    <!-- Mobile menu -->
+    <ul class="nav__list" id="nav-mobile" style="position:absolute;left:0;right:0;top:100%;display:none;background:var(--bg);padding:1rem;flex-direction:column;gap:.5rem"></ul>
+  </header>
+
+  <main class="container">
+
+    <!-- HOME -->
+    <section id="home" class="section home">
+      <div class="home__left">
+        <h1 class="home__title">Hi, I'm <span style="color:var(--accent)">Sivakumar B</span></h1>
+        <p class="home__subtitle">
+          Passionate IT student eager to apply programming and web development skills to create impactful projects and grow through hands-on experience..
+        </p>
+
+        <div class="home__cta">
+          <a class="btn" href="#contact">Contact Me <i class="uil uil-message"></i></a>
+          <a class="btn" href="resume.pdf" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--title)">View Resume</a>
+        </div>
+
+        <div class="home__socials" aria-hidden="false" style="margin-top:1rem">
+          <a class="social-icon" href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank" aria-label="LinkedIn"><i class="uil uil-linkedin-alt"></i></a>
+          <a class="social-icon" href="https://github.com/BSivakumar" target="_blank" aria-label="GitHub"><i class="uil uil-github-alt"></i></a>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:1rem;">
+        <div class="home__card">
+          <div style="width:86px;height:86px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.6rem">SB</div>
+          <div>
+            <div style="font-weight:700;color:var(--title)">Sivakumar B</div>
+            <div class="muted">IT Student • Aspiring Developer</div>
+            <div style="margin-top:.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+              <span class="chip">C++</span>
+              <span class="chip">Java</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <h2 class="section__title">About Me</h2>
+      <span class="section__subtitle">My introduction & education</span>
+
+      <div class="about__grid">
+        <div>
+          <p style="line-height:1.6;color:var(--text);">
+            A passionate and driven IT student with a strong foundation in programming and web development.
+            I'm eager to apply my technical knowledge to build meaningful, user-focused projects.
+          </p>
+
+          <h3 style="margin-top:1rem;color:var(--title)">Education</h3>
+          
+        </div>
+
+        <div style="display:grid;gap:1rem">
+          <div class="edu-card">
+            <h3>B.Tech — Information Technology</h3>
+            <p class="muted">Sri Krishna College of Technology, Coimbatore</p>
+            <p style="margin-top:.35rem;font-size:.92rem;color:var(--text)">(2024 – Present) • GPA: 8.25</p>
+          </div>
+
+          <div class="edu-card">
+            <h3>Higher Secondary (HSC)</h3>
+            <p class="muted">R.G. Matric Hr. Sec. School, Udumalpet</p>
+            <p style="margin-top:.35rem;font-size:.92rem;color:var(--text)">(2024) • 91.5% Aggregate</p>
+          </div>
+          <div class="edu-card">
+            <h3>Secondary Schooling (SSLC)</h3>
+            <p class="muted">R.G. Matric Hr. Sec. School, Udumalpet</p>
+            <p style="margin-top:.35rem;font-size:.92rem;color:var(--text)">(2022) • 93% Aggregate</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <h2 class="section__title">Skills</h2>
+      <span class="section__subtitle">My technical proficiency</span>
+
+      <div class="skills__grid">
+        <div class="skill-box">
+          <div class="skill-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:.6rem">
+              <i class="uil uil-brackets-curly" style="color:var(--accent)"></i>
+              <h3 style="margin:0;color:var(--title)">Technical Skills</h3>
+            </div>
+            <i class="uil uil-angle-down"></i>
+          </div>
+          <div class="skill-list" style="margin-top:.8rem">
+            <p><strong>Programming:</strong> C++, Python, Java</p>
+            <p><strong>Web:</strong> HTML, CSS, JavaScript, Responsive Design</p>
+            <p><strong>Frameworks / Tools:</strong> React (basics), Git, VS Code, WordPress</p>
+            <p><strong>Design:</strong> Canva, Draw.io, Photoshop (basic)</p>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:.6rem">
+              <i class="uil uil-users-alt" style="color:var(--accent)"></i>
+              <h3 style="margin:0;color:var(--title)">Soft Skills</h3>
+            </div>
+            <i class="uil uil-angle-down"></i>
+          </div>
+          <div class="skill-list soft-list" style="margin-top:.8rem">
+            <div>Leadership</div><div>Collaboration</div>
+            <div>Adaptability</div><div>Problem-solving</div>
+            <div>Communication</div><div>Conflict resolution</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <h2 class="section__title">Experience</h2>
+      <span class="section__subtitle">My professional journey</span>
+
+      <div class="exp-card">
+        <h3>Internship on AI & Cloud  — IBM / Edunet Foundation (AICTE Program)</h3>
+        <p class="muted">Remote • 2025</p>
+
+        <ul style="margin-top:.6rem;line-height:1.6;color:var(--text)">
+          <li>Completed a 4-week internship on Emerging Technologies (AI & Cloud Computing) using IBM Cloud Platform and SkillsBuild.</li>
+          <li>Explored key areas such as AI services, cloud deployment, and data analytics through hands-on projects and guided modules.</li>
+          <li>Collaborated on practical assignments that enhanced understanding of cloud infrastructure and cognitive computing.</li>
+          <li>Gained valuable exposure to industry-relevant tools and workflows through mentorship from IBM and Edunet professionals.</li>
+        </ul>
+      </div><br>
+      <div class="exp-card">
+        <h3>Digital Marketing Admin Intern — Dodovy</h3>
+        <p class="muted">Udumalpet (Startup) • 2022 – 2023</p>
+
+        <ul style="margin-top:.6rem;line-height:1.6;color:var(--text)">
+          <li>Managed WordPress admin tasks (content updates & plugin maintenance).</li>
+          <li>Designed and executed social media campaigns for Instagram and WhatsApp.</li>
+          <li>Supported email outreach, tracked engagement metrics and growth strategies.</li>
+          <li>Gained hands-on experience in early-stage startup operations and branding.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <h2 class="section__title">Projects</h2>
+      <span class="section__subtitle">Recent work & prototypes</span>
+
+      <div class="projects-swiper swiper">
+        <div class="swiper-wrapper">
+          <!-- Project 1 -->
+          <div class="swiper-slide project-slide">
+            <div>
+              <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=E-Commerce" alt="E-Commerce">
+            </div>
+            <div>
+              <h3>E-Commerce Website</h3>
+              <p>Responsive platform built with HTML, CSS and vanilla JavaScript — product pages, cart functionality and responsive layout.</p>
+              <a class="btn btn--small" href="#" style="margin-top:.5rem">Demo <i class="uil uil-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="swiper-slide project-slide">
+            <div>
+              <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=Task+Manager" alt="Task Manager">
+            </div>
+            <div>
+              <h3>Task Management App</h3>
+              <p>A CLI tool in Python to add, delete and track daily tasks — simple persistent storage and filters.</p>
+              <a class="btn btn--small" href="#" style="margin-top:.5rem">GitHub <i class="uil uil-github-alt"></i></a>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="swiper-slide project-slide">
+            <div>
+              <img src="https://fakeimg.pl/600x400/282A36/E9E9E9?text=Personal+Blog" alt="Personal Blog">
+            </div>
+            <div>
+              <h3>Personal Blog (WordPress)</h3>
+              <p>Custom WordPress theme and plugin tweaks to create a fast and SEO-friendly blog site.</p>
+              <a class="btn btn--small" href="#" style="margin-top:.5rem">View <i class="uil uil-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Swiper controls -->
+        <div class="swiper-button-next"><i class="uil uil-angle-right-b"></i></div>
+        <div class="swiper-button-prev"><i class="uil uil-angle-left-b"></i></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="section">
+      <h2 class="section__title">Certifications</h2>
+      <span class="section__subtitle">My credentials</span>
+
+      <div class="certs-grid">
+        <div class="cert-card">
+          <h3>AI & Cloud Internship</h3>
+          <p class="muted">IBM / Edunet Foundation (AICTE Program)
+</p>
+          <span class="cert-btn" data-src="/Users/sivakumar/Sivakumar/Learnings/Portfolio/SIVAKUMAR B- RAG LAB CERTIFICATE.pdf">See Credential</span>
+        </div>
+        <div class="cert-card">
+          <h3>Object Oriented Programming</h3>
+          <p class="muted">NPTEL</p>
+          <span class="cert-btn" data-src="/Users/sivakumar/Sivakumar/Learnings/Portfolio/SIVAKUMAR B- RAG LAB CERTIFICATE.pdf">See Credential</span>
+        </div>
+
+        <div class="cert-card">
+          <h3>Software Engineering Lite</h3>
+          <p class="muted">JP Morgan Chase</p>
+          <span class="cert-btn" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential</span>
+        </div>
+
+        <div class="cert-card">
+          <h3>Intro to Cloud Computing</h3>
+          <p class="muted">IBM – Coursera</p>
+          <span class="cert-btn" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential</span>
+        </div>
+
+        <div class="cert-card">
+          <h3>Data Science Foundations</h3>
+          <p class="muted">NASBA – LinkedIn</p>
+          <span class="cert-btn" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential</span>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal" id="cert-modal">
+        <div class="modal__content">
+          <span class="modal__close">&times;</span>
+          <iframe class="modal__iframe" src=""></iframe>
+        </div>
+      </div>
+    </section>
+    <section id="Participations" class="section">
+      <h2 class="section__title">Participations</h2>
+      <span class="section__subtitle">My Participations</span>
+
+      <div class="certs-grid">
+        <div class="cert-card">
+          <h3>Smart India Hackathon</h3>
+          <p class="muted">Sep 2025</p>
+          <p class="muted">We developed CIVIX – a Crowdsourced Civic Issue Reporting and Resolution System under the Clean & Green Technology problem statement.CIVIX is a smart, citizen-powered platform that connects people with authorities in real time. Just click, report & track – ensuring every voice leads to action.</p>
+</p>
+         
+        </div>
+        <div class="cert-card">
+          <h3>MSME Hackathon</h3>
+          <p class="muted">Aug 2025</p>
+          <p class="muted">Our team worked on FortiFence 🛡️ – an AI-powered geo-fencing solution designed to enhance security and smart monitoring through innovative technology.</p>
+          
+        </div>
+
+      
+        </div>
+
+        
+    </section>
+    
+
+    <!-- ACHIEVEMENTS & TESTIMONIALS -->
+    <section id="achievements" class="section">
+      <h2 class="section__title">Achievements</h2>
+      <span class="section__subtitle">Small milestones I’m proud of</span>
+
+      <div style="display:grid;gap:1rem;margin-top:1rem">
+        <div class="ach-grid">
+          <div class="card-small">
+            <strong>Internship Completed</strong>
+            <div class="muted" style="margin-top:.35rem">Digital Marketing Admin Intern — Dodovy</div>
+          </div>
+          <div class="card-small">
+            <strong>Internship Completed</strong>
+            <div class="muted" style="margin-top:.35rem">IBM - AICTE Internship on AI and Cloud</div>
+          </div>
+          <div class="card-small">
+            <strong>SIH Hackathon</strong>
+            <div class="muted" style="margin-top:.35rem">Out of 300+ teams in the internal hackathon, our team was shortlisted and ranked among the top 50.</div>
+          </div>
+          <div class="card-small">
+            <strong>Top Scorer (HSC)</strong>
+            <div class="muted" style="margin-top:.35rem">91.5% aggregate in Higher Secondary (2024)</div>
+          </div>
+          
+        </div>
+
+        
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2 class="section__title">Contact Me</h2>
+      <span class="section__subtitle">Get in touch</span>
+
+      <div class="contact__grid">
+        <div class="contact__info">
+          <h3 style="margin-bottom:.4rem;color:var(--title)">Contact Information</h3>
+          <p class="muted"><i class="uil uil-phone" style="margin-right:.45rem"></i> 7708587882</p>
+          <p class="muted"><i class="uil uil-envelope" style="margin-right:.45rem"></i> sivakumar290307@gmail.com</p>
+          <p class="muted"><i class="uil uil-map-marker" style="margin-right:.45rem"></i> Coimbatore, India</p>
+          <div style="margin-top:.6rem;display:flex;gap:.5rem">
+            <a class="social-icon" href="https://www.linkedin.com/in/sivakumar-b-/" target="_blank"><i class="uil uil-linkedin-alt"></i></a>
+            <a class="social-icon" href="https://github.com/BSivakumar" target="_blank"><i class="uil uil-github-alt"></i></a>
+          </div>
+        </div>
+
+        <form action="https://formspree.io/f/your_form_id" method="POST" style="display:grid;gap:.75rem">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+            <div style="background:var(--card);padding:.6rem;border-radius:10px"><label style="font-size:.8rem;color:var(--title)">Name</label><input name="name" required style="width:100%;background:transparent;border:none;outline:none;color:var(--text)"></div>
+            <div style="background:var(--card);padding:.6rem;border-radius:10px"><label style="font-size:.8rem;color:var(--title)">Email</label><input type="email" name="email" required style="width:100%;background:transparent;border:none;outline:none;color:var(--text)"></div>
+          </div>
+
+          <div style="background:var(--card);padding:.6rem;border-radius:10px"><label style="font-size:.8rem;color:var(--title)">Project</label><input name="project" style="width:100%;background:transparent;border:none;outline:none;color:var(--text)"></div>
+
+          <div style="background:var(--card);padding:.6rem;border-radius:10px">
+            <label style="font-size:.8rem;color:var(--title)">Message</label>
+            <textarea name="message" required rows="5" style="width:100%;background:transparent;border:none;outline:none;color:var(--text)"></textarea>
+          </div>
+
+          <button type="submit" class="btn" style="justify-self:start">Send Message <i class="uil uil-message"></i></button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+  <div class="container" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:1rem;">
+    <div class="muted">
+      © <span id="currentYear"></span> Sivakumar. All rights reserved
+    </div>
+  </div>
 </footer>
 
-<!-- ==================== SCRIPTS ==================== -->
-<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/scrollreveal"></script>
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script>
-/* ==== MOBILE MENU ==== */
-const navToggle = document.getElementById('nav-toggle');
-const navMobile  = document.getElementById('nav-mobile');
-const desktopLinks = document.querySelectorAll('#nav-desktop .nav__link');
+  <script>
+    // current year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-desktopLinks.forEach(l => navMobile.innerHTML += `<li><a href="${l.getAttribute('href')}" class="nav__link">${l.textContent}</a></li>`);
-const mobileLinks = navMobile.querySelectorAll('.nav__link');
+    /* ===== Mobile menu build from desktop links ===== */
+    const navToggle = document.getElementById('nav-toggle');
+    const navMobile = document.getElementById('nav-mobile');
+    const desktopLinks = document.querySelectorAll('#nav-desktop .nav__link');
 
-navToggle.addEventListener('click', () => {
-    navMobile.classList.toggle('show');
-    navToggle.classList.toggle('uil-apps');
-    navToggle.classList.toggle('uil-times');
-});
-mobileLinks.forEach(l => l.addEventListener('click', () => {
-    navMobile.classList.remove('show');
-    navToggle.classList.add('uil-apps');
-    navToggle.classList.remove('uil-times');
-}));
+    // populate mobile menu
+    desktopLinks.forEach(l => {
+      navMobile.innerHTML += `<li><a href="${l.getAttribute('href')}" class="nav__link">${l.textContent}</a></li>`;
+    });
+    const mobileLinks = navMobile.querySelectorAll('.nav__link');
 
-/* ==== ACTIVE LINK ON SCROLL ==== */
-const sections = document.querySelectorAll('section[id]');
-function scrollActive(){
-    const scrollY = window.pageYOffset;
-    sections.forEach(sec => {
-        const height = sec.offsetHeight,
-              top    = sec.offsetTop - 80,
-              id     = sec.getAttribute('id');
+    navToggle.addEventListener('click', () => {
+      // show/hide
+      const isShown = navMobile.style.display === 'flex';
+      navMobile.style.display = isShown ? 'none' : 'flex';
+      navMobile.style.flexDirection = 'column';
+      navMobile.style.gap = '.5rem';
+      navToggle.classList.toggle('uil-times');
+      navToggle.classList.toggle('uil-apps');
+    });
+
+    mobileLinks.forEach(l => l.addEventListener('click', () => {
+      navMobile.style.display = 'none';
+      navToggle.classList.add('uil-apps');
+      navToggle.classList.remove('uil-times');
+    }));
+
+    /* ===== Active nav on scroll ===== */
+    const sections = document.querySelectorAll('section[id]');
+    function scrollActive(){
+      const scrollY = window.pageYOffset;
+      sections.forEach(sec => {
+        const height = sec.offsetHeight;
+        const top = sec.offsetTop - 120;
+        const id = sec.getAttribute('id');
         const links = document.querySelectorAll(`.nav__link[href="#${id}"]`);
         if(scrollY > top && scrollY <= top + height){
-            links.forEach(l => l.classList.add('active'));
-        }else{
-            links.forEach(l => l.classList.remove('active'));
+          links.forEach(l => l.classList.add('active'));
+        } else {
+          links.forEach(l => l.classList.remove('active'));
         }
+      });
+    }
+    window.addEventListener('scroll', scrollActive);
+
+    /* ===== Header shadow on scroll ===== */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY >= 60);
     });
-}
-window.addEventListener('scroll', scrollActive);
 
-/* ==== HEADER SHADOW ==== */
-window.addEventListener('scroll', () => {
-    document.getElementById('header').classList.toggle('shadow-header', window.scrollY >= 80);
-});
+    /* ===== Typed.js (small line if needed) ===== */
+    try {
+      new Typed('.auto-type', { strings: ['IT Student','Aspiring Developer','Tech Enthusiast'], typeSpeed: 80, backSpeed: 50, loop: true });
+    } catch(e){/* ignore if typed not needed */ }
 
-/* ==== TYPED JS ==== */
-new Typed('.auto-type', {strings:['IT Student','Aspiring Developer','Tech Enthusiast'],typeSpeed:100,backSpeed:60,loop:true});
+    /* ===== Theme toggle (light/dark) with icon state ===== */
+    const themeBtn = document.getElementById('theme-btn');
+    const lightClass = 'light';
+    const iconSun = 'uil-sun';
+    const iconMoon = 'uil-moon';
 
-/* ==== THEME ==== */
-const themeBtn = document.getElementById('theme-btn');
-const light = 'light', sun = 'uil-sun';
-const savedTheme = localStorage.getItem('theme');
-const savedIcon  = localStorage.getItem('icon');
-if(savedTheme){document.body.classList.toggle(light, savedTheme===light); themeBtn.classList.toggle(sun, savedIcon===sun);}
-themeBtn.addEventListener('click',()=>{
-    document.body.classList.toggle(light);
-    themeBtn.classList.toggle(sun);
-    localStorage.setItem('theme', document.body.classList.contains(light)?light:'dark');
-    localStorage.setItem('icon', themeBtn.classList.contains(sun)?sun:'uil-moon');
-});
+    // load saved
+    const savedTheme = localStorage.getItem('site-theme');
+    const savedIcon = localStorage.getItem('site-icon');
+    if(savedTheme === 'light') document.body.classList.add(lightClass);
+    if(savedIcon) {
+      themeBtn.classList.remove('uil-moon','uil-sun');
+      themeBtn.classList.add(savedIcon);
+    } else {
+      themeBtn.classList.add('uil-moon'); // default icon
+    }
 
-/* ==== SWIPER ==== */
-new Swiper('.projects-swiper',{
-    loop:true,
-    navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},
-    pagination:{el:'.swiper-pagination',clickable:true},
-    breakpoints:{640:{slidesPerView:1},768:{slidesPerView:1}}
-});
+    themeBtn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle(lightClass);
+      // swap icon
+      themeBtn.classList.toggle('uil-moon');
+      themeBtn.classList.toggle('uil-sun');
+      const icon = themeBtn.classList.contains('uil-sun') ? 'uil-sun' : 'uil-moon';
+      localStorage.setItem('site-theme', isLight ? 'light' : 'dark');
+      localStorage.setItem('site-icon', icon);
+    });
 
-/* ==== SKILL TOGGLE ==== */
-document.querySelectorAll('.skill-header').forEach(h=>h.addEventListener('click',()=>h.classList.toggle('open')));
+    /* ===== Swiper for projects ===== */
+    const swiper = new Swiper('.projects-swiper', {
+      loop: true,
+      spaceBetween: 20,
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      breakpoints: { 320: { slidesPerView: 1 }, 768: { slidesPerView: 1 } }
+    });
 
-/* ==== CERT MODAL ==== */
-const modal = document.getElementById('cert-modal');
-const iframe = modal.querySelector('.modal__iframe');
-document.querySelectorAll('.cert-btn').forEach(b=>{
-    b.addEventListener('click',e=>{
+    /* ===== Skill toggle behavior (show/hide lists) ===== */
+    document.querySelectorAll('.skill-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.classList.toggle('open');
+        const next = header.nextElementSibling;
+        if(!next) return;
+        if(next.style.display === 'grid' || next.style.display === 'block') next.style.display = 'none';
+        else next.style.display = 'grid';
+      });
+    });
+
+    // initialize skill lists visible on desktop by default
+    if(window.innerWidth > 900){
+      document.querySelectorAll('.skill-list').forEach(s => { s.style.display = 'grid'; });
+    }
+
+    /* ===== Cert modal behavior ===== */
+    const certModal = document.getElementById('cert-modal');
+    const certIframe = certModal ? certModal.querySelector('.modal__iframe') : null;
+    const modalClose = certModal ? certModal.querySelector('.modal__close') : null;
+
+    document.querySelectorAll('.cert-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
         e.preventDefault();
-        iframe.src = b.dataset.src;
-        modal.classList.add('active');
+        const src = btn.getAttribute('data-src');
+        if(certIframe) certIframe.src = src;
+        if(certModal) certModal.classList.add('active');
+      });
     });
-});
-modal.querySelector('.modal__close').addEventListener('click',()=>{modal.classList.remove('active');iframe.src='';});
-modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('active');iframe.src='';}});
 
-/* ==== SCROLL REVEAL ==== */
-const sr = ScrollReveal({origin:'top',distance:'60px',duration:2000,delay:200});
-sr.reveal('.section__title,.section__subtitle',{interval:100});
-sr.reveal('.home__blob',{delay:400});
-sr.reveal('.home__data',{origin:'bottom',delay:500});
-sr.reveal('.home__social',{origin:'left',delay:600,interval:100});
-sr.reveal('#about p',{origin:'left'});
-sr.reveal('#about .edu-card',{origin:'right',interval:200});
-sr.reveal('.skill-box,.cert-card,.project-slide',{interval:100});
-</script>
+    if(modalClose){
+      modalClose.addEventListener('click', () => {
+        if(certIframe) certIframe.src = '';
+        certModal.classList.remove('active');
+      });
+    }
+    window.addEventListener('click', (e) => {
+      if(e.target === certModal){
+        if(certIframe) certIframe.src = '';
+        certModal.classList.remove('active');
+      }
+    });
+
+    /* ===== ScrollReveal for subtle animations ===== */
+    try {
+      ScrollReveal().reveal('.section__title, .section__subtitle, .home__card, .edu-card, .project-slide, .cert-card, .exp-card, .card-small', {
+        origin: 'bottom', distance: '30px', duration: 800, interval: 100, easing: 'ease-in-out'
+      });
+    } catch(e){ /* ignore if not available */ }
+
+    /* ===== Accessibility: close mobile menu on resize to desktop ===== */
+    window.addEventListener('resize', () => {
+      if(window.innerWidth > 900){
+        navMobile.style.display = 'none';
+        navToggle.classList.add('uil-apps');
+        navToggle.classList.remove('uil-times');
+      }
+    });
+
+  </script>
 </body>
 </html>
+f
