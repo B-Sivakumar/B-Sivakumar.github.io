@@ -102,6 +102,15 @@
             color: var(--text-color);
         }
 
+        /* --- ADDED THIS FIX --- */
+        @media screen and (min-width: 768px) {
+            body {
+                margin: var(--header-height) 0 0 0;
+            }
+        }
+        /* --- END FIX --- */
+
+
         /*=============== REUSABLE CSS CLASSES ===============*/
         .section { padding: 2rem 0 4rem; }
         .section__title { font-size: var(--h1-font-size); color: var(--title-color); }
@@ -153,24 +162,62 @@
     </style>
 </head>
 <body class="text-[var(--text-color)]">
+    
     <header class="w-full fixed bottom-0 left-0 z-50 bg-[var(--body-color)] md:top-0 md:bottom-auto" id="header">
-        <nav class="h-[var(--header-height)] md:h-[calc(var(--header-height)_+_1.5rem)] flex justify-between items-center container mx-auto px-4">
-            <a href="#" class="text-[var(--title-color)] font-medium hover:text-[var(--first-color)] transition-colors">Sivakumar B</a>
-            <div class="md:!block" id="nav-menu">
-                <ul class="grid grid-cols-4 gap-y-4 md:flex md:gap-x-8">
-                    <li><a href="#home" class="nav__link active-link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-estate text-xl md:hidden"></i>Home</a></li>
-                    <li><a href="#about" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-user text-xl md:hidden"></i>About</a></li>
-                    <li><a href="#skills" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-file-alt text-xl md:hidden"></i>Skills</a></li>
-                    <li><a href="#experience" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-briefcase-alt text-xl md:hidden"></i>Experience</a></li>
-                    <li><a href="#projects" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-scenery text-xl md:hidden"></i>Projects</a></li>
-                    <li><a href="#certifications" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-award text-xl md:hidden"></i>Certs</a></li>
-                    <li><a href="#contact" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]"><i class="uil uil-message text-xl md:hidden"></i>Contact</a></li>
+        <nav class="h-[var(--header-height)] md:h-[calc(var(--header-height)_+_1.5rem)] flex justify-center md:justify-between items-center container mx-auto px-4">
+            
+            <a href="#" class="hidden md:inline text-[var(--title-color)] font-medium hover:text-[var(--first-color)] transition-colors">Sivakumar B</a>
+            
+            <div class="w-full md:w-auto" id="nav-menu"> 
+                <ul class="flex w-full justify-around md:w-auto md:flex md:gap-x-8">
+                    <li>
+                        <a href="#home" class="nav__link active-link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
+                            <i class="uil uil-estate text-xl md:hidden"></i>
+                            <span class="hidden md:inline">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
+                            <i class="uil uil-user text-xl md:hidden"></i>
+                            <span class="hidden md:inline">About</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#skills" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
+                            <i class="uil uil-file-alt text-xl md:hidden"></i>
+                            <span class="hidden md:inline">Skills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#experience" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
+                            <i class="uil uil-briefcase-alt text-xl md:hidden"></i>
+                            <span class="hidden md:inline">Experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#projects" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
+                            <i class="uil uil-scenery text-xl md:hidden"></i>
+                            <span class="hidden md:inline">Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#certifications" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
+                            <i class="uil uil-award text-xl md:hidden"></i>
+                            <span class="hidden md:inline">Certs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
+                            <i class="uil uil-message text-xl md:hidden"></i>
+                            <span class="hidden md:inline">Contact</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <i class="uil uil-moon change-theme text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="theme-button"></i>
+
+            <i class="hidden md:inline uil uil-moon change-theme text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="theme-button"></i>
         </nav>
     </header>
-
     <main class="container mx-auto px-4">
         <section class="section min-h-screen grid items-center" id="home">
             <div class="grid gap-8 md:grid-cols-[1fr_max-content_max-content] md:items-center pt-16">
@@ -187,7 +234,7 @@
                     <a href="#contact" class="button button--flex">Contact Me <i class="uil uil-message button__icon"></i></a>
                 </div>
                 <div class="relative justify-self-center md:order-2">
-                    <svg class="home__blob w-52 md:w-96" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <svg class="home__blob w-52 md:w-96" viewBox="0 0 200 187" xmlns="http://www.w.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <mask id="mask0" mask-type="alpha">
                             <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 41.7223 152.469 24.3446 124.841C6.96687 97.2132 -8.98929 72.481 9.8583 49.9561C28.7058 27.4312 56.58 12.0821 87.7309 4.3482C118.882 -3.3857 154.553 10.8581 174.404 20.4884C182.994 25.0446 188.083 30.7383 190.312 36.4879Z"/>
                         </mask>
@@ -303,6 +350,7 @@
                         See Credential <i class="uil uil-arrow-right text-xs"></i>
                     </a>
                 </div>
+
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Software Engineering Lite</h3><p class="text-xs mb-2">JP Morgan Chase</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Intro to Cloud Computing</h3><p class="text-xs mb-2">IBM – Coursera</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://fakeimg.pl/800x600/282A36/E9E9E9?text=Certificate.jpg">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
                 <div class="certification__content bg-[var(--container-color)] p-4 rounded-lg text-center"><h3 class="text-base font-medium mb-2 text-[var(--title-color)]">Data Science Foundations</h3><p class="text-xs mb-2">NASBA – LinkedIn</p><a href="#" class="certification__button text-sm text-[var(--first-color)]" data-src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">See Credential <i class="uil uil-arrow-right text-xs"></i></a></div>
@@ -397,12 +445,21 @@
                 const scrollY = window.pageYOffset;
                 sections.forEach(current => {
                     const sectionHeight = current.offsetHeight, sectionTop = current.offsetTop - 50, sectionId = current.getAttribute('id'), link = document.querySelector('#nav-menu a[href*=' + sectionId + ']');
-                    if (link) { if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) link.classList.add('active-link'); else link.classList.remove('active-link'); }
+                    if (link) { 
+                        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                            link.classList.add('active-link');
+                        } else {
+                            link.classList.remove('active-link');
+                        }
+                    }
                 });
             }
             window.addEventListener('scroll', scrollActive);
             
-            function scrollHeader() { const nav = document.getElementById('header'); if (this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header'); }
+            function scrollHeader() { 
+                const nav = document.getElementById('header'); 
+                if (this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header'); 
+            }
             window.addEventListener('scroll', scrollHeader);
             
             new Typed('.auto-type', { strings: ['IT Student', 'Aspiring Developer', 'Tech Enthusiast'], typeSpeed: 100, backSpeed: 60, loop: true });
