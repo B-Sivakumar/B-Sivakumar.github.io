@@ -95,21 +95,20 @@
         /*=============== BASE ===============*/
         html { scroll-behavior: smooth; }
         body {
-            margin: 0 0 var(--header-height) 0;
+            margin: 0 0 var(--header-height) 0; /* Bottom margin for mobile nav */
             font-family: var(--body-font);
             font-size: var(--normal-font-size);
             background-color: var(--body-color);
             color: var(--text-color);
         }
 
-        /* --- ADDED THIS FIX --- */
+        /* --- ADDED THIS FIX for desktop top margin --- */
         @media screen and (min-width: 768px) {
             body {
-                margin: var(--header-height) 0 0 0;
+                margin: var(--header-height) 0 0 0; /* Top margin for desktop nav */
             }
         }
         /* --- END FIX --- */
-
 
         /*=============== REUSABLE CSS CLASSES ===============*/
         .section { padding: 2rem 0 4rem; }
@@ -172,49 +171,47 @@
                 <ul class="flex w-full justify-around md:w-auto md:flex md:gap-x-8">
                     <li>
                         <a href="#home" class="nav__link active-link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-estate text-xl md:hidden"></i>
-                            <span class="hidden md:inline">Home</span>
-                        </a>
+                            <i class="uil uil-estate text-xl"></i> <span class="hidden md:inline">Home</span> </a>
                     </li>
                     <li>
                         <a href="#about" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-user text-xl md:hidden"></i>
+                            <i class="uil uil-user text-xl"></i>
                             <span class="hidden md:inline">About</span>
                         </a>
                     </li>
                     <li>
                         <a href="#skills" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-file-alt text-xl md:hidden"></i>
+                            <i class="uil uil-file-alt text-xl"></i>
                             <span class="hidden md:inline">Skills</span>
                         </a>
                     </li>
                     <li>
                         <a href="#experience" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-briefcase-alt text-xl md:hidden"></i>
+                            <i class="uil uil-briefcase-alt text-xl"></i>
                             <span class="hidden md:inline">Experience</span>
                         </a>
                     </li>
                     <li>
                         <a href="#projects" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-scenery text-xl md:hidden"></i>
+                            <i class="uil uil-scenery text-xl"></i>
                             <span class="hidden md:inline">Projects</span>
                         </a>
                     </li>
                     <li>
                         <a href="#certifications" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-award text-xl md:hidden"></i>
+                            <i class="uil uil-award text-xl"></i>
                             <span class="hidden md:inline">Certs</span>
                         </a>
                     </li>
                     <li>
                         <a href="#contact" class="nav__link flex flex-col items-center text-sm font-medium text-[var(--title-color)] hover:text-[var(--first-color)]">
-                            <i class="uil uil-message text-xl md:hidden"></i>
+                            <i class="uil uil-message text-xl"></i>
                             <span class="hidden md:inline">Contact</span>
                         </a>
                     </li>
                 </ul>
             </div>
-
+            
             <i class="hidden md:inline uil uil-moon change-theme text-[1.25rem] text-[var(--title-color)] cursor-pointer hover:text-[var(--first-color)]" id="theme-button"></i>
         </nav>
     </header>
@@ -234,7 +231,7 @@
                     <a href="#contact" class="button button--flex">Contact Me <i class="uil uil-message button__icon"></i></a>
                 </div>
                 <div class="relative justify-self-center md:order-2">
-                    <svg class="home__blob w-52 md:w-96" viewBox="0 0 200 187" xmlns="http://www.w.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <svg class="home__blob w-52 md:w-96" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <mask id="mask0" mask-type="alpha">
                             <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 41.7223 152.469 24.3446 124.841C6.96687 97.2132 -8.98929 72.481 9.8583 49.9561C28.7058 27.4312 56.58 12.0821 87.7309 4.3482C118.882 -3.3857 154.553 10.8581 174.404 20.4884C182.994 25.0446 188.083 30.7383 190.312 36.4879Z"/>
                         </mask>
